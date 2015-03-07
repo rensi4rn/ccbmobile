@@ -21,7 +21,7 @@ Ext.define('pxp.view.Login', {
         items: [
             {
                 xtype: 'image',
-                src: 'resources/img/logo.png',
+                src: 'resources/img/ccb.jpg',
                 style: 'width:150px;height:81px;margin:auto' 
             },
             {

@@ -31,7 +31,8 @@ Ext.application({
         'MainMenu',
         'Login',
         'interino.Interino',
-        'vobowf.VoBoWf' 
+        'vobowf.VoBoWf' ,
+        'obrero.Obrero'
         
     ],
     
@@ -40,7 +41,8 @@ Ext.application({
         'Main',
         'Interino',
         'VoBoWf',
-        'VoBoFondo'
+        'VoBoFondo',
+        'Obrero'
     ],
 
     icon: {

@@ -82,10 +82,10 @@ Ext.define('pxp.view.vobofondo.VoBoFondoList', {
 				
 				            '<tr  id="tr-1025">',
 				                '<td data-title="Solicitante" >',
-				                    '<b>{desc_empleado}</b> ',
+				                    '<b>{desc_solicitante}</b> ',
 				                    '<div style="font-size: 11px;">',
-				                        '<b>Unidad: </b> {desc_presupuesto} <br />',
-				                        '<b>Fecha: </b> {fecha_sol}',
+				                        '<b>Unidad: </b> Aeropuerto LPB <br />',
+				                        '<b>Fecha: </b> 03 September 2014',
 				                    '</div>',
 				                '</td>',
 				                '<td data-title="Motivo" >',

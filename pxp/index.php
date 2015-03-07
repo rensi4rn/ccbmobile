@@ -9,9 +9,8 @@ if ($_SERVER['SERVER_PORT']!='443') {
 <html manifest="" lang="en-US">
 <head>
     <meta charset="UTF-8">
-    <title>pxp</title>
-     <link rel="icon" type="image/x-icon" href="resources/icons/boa.ico" />
-
+    <title>CCB</title>
+    
     <style type="text/css">
          /**
          * Example of an initial loading indicator.

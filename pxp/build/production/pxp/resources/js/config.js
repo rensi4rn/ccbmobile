@@ -1,0 +1,1 @@
+function _3b5022690efa8b1450f5b542e663d41d55f61093(){};_CONFIG={_host:"10.0.0.211",_port:"80",_protocol:"http",_base_url:"kerp/lib/rest/",_time_period:5000,};

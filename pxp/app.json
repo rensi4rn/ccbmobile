@@ -67,8 +67,6 @@
             "path": "resources/js/md5.js",
             "update": "full" 
         },
-    
-    
         {
             "path": "../touch/sencha-touch.js",
             "x-bootstrap": true
@@ -112,7 +110,7 @@
         },
         
         {
-            "path": "resources/css/tabla_resposive.css",
+            "path": "resources/css/tabla_responsive.css",
             "update": "full"
         }
         
@@ -165,7 +163,7 @@
      * must be kept intact for proper generation of deltas between updates
      */
     "archivePath": "archive",
-    "lan":['es']
+    "lan":['es'],
 
     /**
      * List of package names to require for the cmd build process
@@ -177,5 +175,5 @@
      * Uniquely generated id for this application, used as prefix for localStorage keys.
      * Normally you should never change this value.
      */
-    "id": "0ad03ef1-a3b9-481d-afd1-1f195de8de0d"
+    "id": "be669978-49e2-4c6a-96a4-128ba9b3f815"
 }
