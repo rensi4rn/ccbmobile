@@ -41,8 +41,7 @@
     "js": [
          {
             "path": "resources/js/config.js",
-            "remote": true,
-            "update": "full" 
+            "remote": true
         },
     
         {
@@ -67,8 +66,7 @@
         },
         {
             "path": "resources/js/md5.js",
-            "remote": true,
-            "update": "full"
+            "remote": true
         },
     
     
@@ -106,16 +104,16 @@
     "css": [
         {
             "path": "resources/css/app.css",
-            "update": "delta"
+            "remote": true
         },
         
         {
             "path": "resources/css/slidenav.css",
-            "update": "full"
+            "remote": true
         },
         {
             "path": "resources/css/tabla_responsive.css",
-            "update": "full"
+            "remote": true
         }
     ],
 

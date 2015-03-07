@@ -41,31 +41,31 @@
     "js": [
         {
             "path": "resources/js/config.js",
-            "update": "full" 
+            "remote": true 
         },    
         {
             "path": "resources/js/base64.js",
-            "update": "full" 
+            "remote": true 
         },
         {
             "path": "resources/js/Serpent.js",
-            "update": "full" 
+            "remote": true  
         },
         {
             "path": "resources/js/rijndael.js",
-            "update": "full" 
+            "remote": true 
         },
         {
             "path": "resources/js/mcrypt.js",
-            "update": "full" 
+            "remote": true 
         },
         {
             "path": "resources/js/utf8.js",
-             "update": "full" 
+             "remote": true 
         },
         {
             "path": "resources/js/md5.js",
-            "update": "full" 
+            "remote": true 
         },
         {
             "path": "../touch/sencha-touch.js",
@@ -101,17 +101,17 @@
     "css": [
        {
             "path": "resources/css/app.css",
-            "update": "delta"
+            "remote": true 
         },
         
         {
             "path": "resources/css/slidenav.css",
-            "update": "full"
+            "remote": true 
         },
         
         {
             "path": "resources/css/tabla_responsive.css",
-            "update": "full"
+            "remote": true 
         }
         
         
