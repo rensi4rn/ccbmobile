@@ -32,7 +32,8 @@ Ext.application({
         'Login',
         'interino.Interino',
         'vobowf.VoBoWf' ,
-        'obrero.Obrero'
+        'obrero.Obrero',
+        'regionevento.RegionEvento',
         
     ],
     
@@ -42,7 +43,8 @@ Ext.application({
         'Interino',
         'VoBoWf',
         'VoBoFondo',
-        'Obrero'
+        'Obrero',
+        'RegionEvento'
     ],
 
     icon: {
@@ -75,7 +77,7 @@ Ext.application({
         
         // Initialize the main view
         Ext.Viewport.add(Ext.create('pxp.view.Login'));
-        
+         Ext.util.Format.defaultDateFormat = 'm/d/Y';
         
     },
     
