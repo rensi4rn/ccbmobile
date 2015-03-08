@@ -27,8 +27,7 @@ Ext.define('pxp.view.regionevento.RegionEventoList', {
     initialize:function(){
     	var me = this;
     	me.store = Ext.create('pxp.store.RegionEvento');
-    	me.store.sort('fecha_programada', 'DESC');
-	   // me.getStore().load();
+    	
 	   
 	   me.add([
 	   	    {
@@ -38,7 +37,7 @@ Ext.define('pxp.view.regionevento.RegionEventoList', {
 	                    {
 	                        xclass: 'Ext.plugin.ListPaging',
 	                        autoPaging: true,
-	                        noMoreRecordsText: 'No More Records'
+	                        noMoreRecordsText: 'No tenemos mas registros'
 	                    },
 	                    { xclass: 'Ext.plugin.PullRefresh' }
 	                ],
