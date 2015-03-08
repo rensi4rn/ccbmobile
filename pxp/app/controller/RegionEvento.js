@@ -58,9 +58,10 @@ Ext.define('pxp.controller.RegionEvento', {
      	//this.getInterinotbar().hide();
      	this.getRegioneventoform().show();
      	this.getRegioneventoform().down('title').setTitle('Nuevo Evento');
+     	this.getRegioneventoform().reset(); 
    },
    onBackList:function(){
-   	    this.getRegioneventoform().reset(); 
+   	    
    	    this.getRegioneventoform().hide();
     	this.getRegioneventolist().show();
      	
@@ -71,6 +72,7 @@ Ext.define('pxp.controller.RegionEvento', {
    onFormEdit: function(list, index, target, record, e, eOpts){
    	    this.getRegioneventoform().show();
     	this.getRegioneventolist().hide();
+    	this.getRegioneventoform().reset(); 
     	this.getRegioneventoform().setRecord(record);
     	this.getRegioneventoform().down('title').setTitle('Editar Evento');
     	
@@ -158,14 +160,10 @@ Ext.define('pxp.controller.RegionEvento', {
 		        method: 'POST',
 		        scope: me,
 		        success: function(resp){
-		           var Response = Ext.JSON.decode(resp.responseText);
+		        var Response = Ext.JSON.decode(resp.responseText);
 		           pxp.app.hideMask();
-		           Ext.Msg.alert('Info...', Response.ROOT.detalle.mensaje, Ext.emptyFn);
-		           //mostrar y actualizar el panel de listado
-		           me.onBackList(); 
-		           me.getRegioneventolist().down('list').getStore().load({start:0,
-															    	  limit:20,
-															    	  page:1});
+		           me.getRegioneventolist().down('list').getStore().load({start:0,limit:20, page:1});
+		         
 		        },
 		        failure:function(resp){
                     var Response = Ext.JSON.decode(resp.responseText);
@@ -195,12 +193,7 @@ Ext.define('pxp.controller.RegionEvento', {
     	   Ext.Viewport.add(me.eventocmp);
     	}
     	
-    	//var fecha = me.getRegioneventoform().down('#fecha').getFormattedValue('d/m/Y'),
     	var  store = me.eventocmp.down('list').getStore();
-    	
-    	//me.casaoracioncmp.setBaseParams({'fecha':fecha});
-    	
-    	//store.getProxy().setExtraParams({'fecha':fecha});
     	store.load({
     		start:0,
     		limit:20,
@@ -229,12 +222,7 @@ Ext.define('pxp.controller.RegionEvento', {
     	   Ext.Viewport.add(me.casaoracioncmp);
     	}
     	
-    	//var fecha = me.getRegioneventoform().down('#fecha').getFormattedValue('d/m/Y'),
     	var  store = me.casaoracioncmp.down('list').getStore();
-    	
-    	//me.casaoracioncmp.setBaseParams({'fecha':fecha});
-    	
-    	//store.getProxy().setExtraParams({'fecha':fecha});
     	store.load({
     		start:0,
     		limit:20,

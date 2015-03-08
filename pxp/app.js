@@ -33,8 +33,7 @@ Ext.application({
         'interino.Interino',
         'vobowf.VoBoWf' ,
         'obrero.Obrero',
-        'regionevento.RegionEvento',
-        
+        'regionevento.RegionEvento'        
     ],
     
     controllers : [

@@ -93,6 +93,6 @@ Ext.define('pxp.controller.Obrero', {
     
    onListTap: function(lista, index, target, record, e, eOpts){
    	console.log('...  ',record);
-   },
+   }
    
 });
