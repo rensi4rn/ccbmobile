@@ -18,11 +18,12 @@ Ext.define('pxp.controller.Obrero', {
 
         refs: {
             obrerolist: 'obrerolist',
+            obreroform: 'obreroform',
             obrerotbar: 'obrerotbar'
         },
         control: {
             'obrerolist list': {
-                itemtap: 'onListTap'
+                itemdoubletap: 'onFormEdit'
             },            
             'obrerotbar #refreshobrero':{
             	tap:'onRefresh'
@@ -30,11 +31,58 @@ Ext.define('pxp.controller.Obrero', {
             'obrerotbar #searchfComponent':{
             	action: 'onActiveFilter',
             	clearicontap: 'onClearFilter'
+            },
+            'obreroform #back':{
+            	tap:'onBackList'
+            },
+            
+            'obreroform #save':{
+            	tap:'onSave'
             }
          } 
     },
-    
-    onActiveFilter:function(field){
+    onFormEdit: function(list, index, target, record, e, eOpts){
+   	    this.getObreroform().show();
+    	this.getObrerolist().hide();
+    	this.getObreroform().reset(); 
+    	this.getObreroform().setRecord(record);
+    	this.getObreroform().down('title').setTitle('Editar cotacto');
+    	
+    	
+   },
+   onBackList:function(){
+   	   this.getObreroform().hide();
+       this.getObrerolist().show();
+   },
+   onSave:function(){
+    	var me = this,
+    	    params =  me.getObreroform().getValues();
+             
+        pxp.app.showMask();      
+    	Ext.Ajax.request({
+		        withCredentials: true,
+	            useDefaultXhrHeader: false,
+	            url: pxp.apiRest._url('admin/Obrero/modificarObreroMobile'),
+		        params: params,
+		        method: 'POST',
+		        scope: me,
+		        success: function(resp){
+		           var Response = Ext.JSON.decode(resp.responseText);
+		           pxp.app.hideMask();
+		           me.onBackList(); 
+		           me.getObrerolist().down('list').getStore().load({start:0,
+															    	  limit:20,
+															    	  page:1});
+		        },
+		        failure:function(resp){
+                    var Response = Ext.JSON.decode(resp.responseText);
+                    pxp.app.hideMask();
+                    alert(Response.ROOT.detalle.mensaje)
+                }
+        });
+    	
+   },
+   onActiveFilter:function(field){
     	var me = this;
 	    me.getObrerolist().down('list').mask(); 
     	var store = me.getObrerolist().down('list').getStore();

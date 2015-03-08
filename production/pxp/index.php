@@ -3,7 +3,7 @@ session_start();
 session_set_cookie_params (0,'/', '' ,true ,true);
 ?>
 <!DOCTYPE HTML>
-<html manifest="cache.appcache" lang="en-US">
+<html manifest="cache.appcache">
 <head>
     <meta charset="UTF-8">
     <title>pxp</title>

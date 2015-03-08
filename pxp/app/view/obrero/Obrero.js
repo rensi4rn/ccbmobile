@@ -7,7 +7,8 @@ Ext.define('pxp.view.obrero.Obrero', {
     xtype: 'obrero',
     requires: [
         'pxp.view.obrero.ObreroList',
-        'pxp.view.obrero.ObreroTbar'        
+        'pxp.view.obrero.ObreroTbar',
+        'pxp.view.obrero.ObreroForm'        
     ],
 
     config: {
@@ -16,6 +17,11 @@ Ext.define('pxp.view.obrero.Obrero', {
 	           {
 	                xtype: 'obrerolist',
 	                flex:1
+	           },
+	           {
+	            	xtype: 'obreroform',
+	            	flex:1,
+	                hidden:true
 	           }
 	          
           ]

@@ -64,6 +64,9 @@ Ext.define('pxp.view.obrero.ObreroList', {
 						  "<tr>",
 						    "<td colspan=2 style='float: left;' width='100%'>Correo: {correo}</td>",
 						  "</tr>",
+						  "<tr>"+
+						    "<td colspan=2 style='float: left;' width='100%'><p align='right'><font size='1'>(actualizado por: {usr_mod})</font></p></td>"+						   
+						  "</tr>"+
 						  "</table>",
 						  "</div>")
 		 }]);
