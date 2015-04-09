@@ -101,10 +101,14 @@ Ext.define('pxp.controller.Interino', {
 		           pxp.app.hideMask();
 		           Ext.Msg.alert('Info...', Response.ROOT.detalle.mensaje, Ext.emptyFn);
 		           //mostrar y actualizar el panel de listado
-		           me.onBackInterinoList(); 
-		           me.getInterinolist().down('list').getStore().load({start:0,
-															    	  limit:20,
-															    	  page:1});
+		           if(Response.ROOT.error){
+		           	   alert(Response.ROOT.detalle.mensaje)
+		           }
+		           else{
+			           //mostrar y actualizar el panel de listado
+			           me.onBackInterinoList(); 
+			           me.getInterinolist().down('list').getStore().load({start:0,limit:20,page:1});
+		           }										    	  
 		        },
 		        failure:function(resp){
                     var Response = Ext.JSON.decode(resp.responseText);

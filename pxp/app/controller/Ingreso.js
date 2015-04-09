@@ -31,7 +31,7 @@ Ext.define('pxp.controller.Ingreso', {
             'ingresotbar #addingreso': {
                 tap: 'onAdd'
             },
-            'ingresotbar #deleteingreso': {
+            'ingresotbar #deleteingeso': {
                 tap: 'onDelete'
             },
             
@@ -78,10 +78,21 @@ Ext.define('pxp.controller.Ingreso', {
     
     
    onAdd:function(){
-        this.getIngresolist().hide();
+   	
+   	    this.getIngresolist().hide();
      	this.getIngresoform().show();
      	this.getIngresoform().down('title').setTitle('Nuevo Evento');
-     	this.getIngresoform().reset(); 
+     	this.getIngresoform().reset();
+     	var ges = parseInt(this.getIngresoformfilter().down('#gestion').getValue())//,
+     	    picker = this.getIngresoform().down('#fecha').getPicker();
+     	
+     	if(picker){
+     		picker.setYearFrom(ges*1);
+     	    picker.setYearTo(ges*1);
+     	}
+     	
+     	
+     	 
    },
    onBackList:function(){
    	    
@@ -100,34 +111,31 @@ Ext.define('pxp.controller.Ingreso', {
     	this.getIngresolist().hide();
     	this.getIngresoform().reset(); 
     	this.getIngresoform().setRecord(record);
-    	this.getIngresoform().down('title').setTitle('Editar Evento');
+    	this.getIngresoform().down('title').setTitle('Editar Ingreso');
     	
     	
    },
     
    onSave:function(){
+    	
     	var me = this,
-    	    fecha_programada = me.getIngresoform().down('#fecha_programada'),
-    	    id_evento = me.getIngresoform().down('#id_evento'),
-    	    id_casa_oracion = me.getIngresoform().down('#id_casa_oracion'),
-    	    cantidad_hermano = me.getIngresoform().down('#cantidad_hermano'),
-    	    cantidad_hermana = me.getIngresoform().down('#cantidad_hermana'),
+    	    fecha = me.getIngresoform().down('#fecha'),
     	    estado = me.getIngresoform().down('#estado'),
-    	    params =  me.getIngresoform().getValues();
-             
-             
-        if(!id_evento.getValue()){
-         	Ext.Msg.alert('Info...', 'Necesitamos que indique el evento', Ext.emptyFn);
+    	    params =  me.getIngresoform().getValues(),
+    	    id_obrero = me.getIngresoform().down('#id_obrero'),
+    	    id_casa_oracion = me.getIngresoformfilter().down('#id_casa_oracion').getValue(),
+            id_gestion = me.getIngresoformfilter().down('#id_gestion').getValue();
+        
+        params  = Ext.apply(params,{obs:'', tipo: 'ingreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
+       
+        
+        if(!fecha.getValue()){
+         	Ext.Msg.alert('Info...', 'Necesitamos que indique la fecha', Ext.emptyFn);
             return;
         } 
         
-        if(!id_casa_oracion.getValue()){
-         	Ext.Msg.alert('Info...', 'Necesitamos que indique la casa de oración', Ext.emptyFn);
-            return;
-        } 
-        
-        if(!id_casa_oracion.getValue()){
-         	Ext.Msg.alert('Info...', 'Necesitamos que indique el estado', Ext.emptyFn);
+        if(!id_obrero.getValue()){
+         	Ext.Msg.alert('Info...', 'Indique un obrero responsable', Ext.emptyFn);
             return;
         }   
              
@@ -136,19 +144,22 @@ Ext.define('pxp.controller.Ingreso', {
     	Ext.Ajax.request({
 		        withCredentials: true,
 	            useDefaultXhrHeader: false,
-	            url: pxp.apiRest._url('admin/Ingreso/insertarBautizoSantaCena'),
+	            url: pxp.apiRest._url('admin/Movimiento/insertarMovimientoIngreso'),
 		        params: params,
 		        method: 'POST',
 		        scope: me,
 		        success: function(resp){
 		           var Response = Ext.JSON.decode(resp.responseText);
-		           pxp.app.hideMask();
-		           //Ext.Msg.alert('Info...', Response.ROOT.detalle.mensaje, Ext.emptyFn);
-		           //mostrar y actualizar el panel de listado
-		           me.onBackList(); 
-		           me.getIngresolist().down('list').getStore().load({start:0,
-															    	  limit:20,
-															    	  page:1});
+		           	pxp.app.hideMask();
+		           if(Response.ROOT.error){
+		           	   alert(Response.ROOT.detalle.mensaje)
+		           }
+		           else{
+			           //mostrar y actualizar el panel de listado
+			           me.onBackList(); 
+			           me.getIngresolist().down('list').getStore().load({start:0,limit:20,page:1});
+		           }
+		           
 		        },
 		        failure:function(resp){
                     var Response = Ext.JSON.decode(resp.responseText);
@@ -172,7 +183,7 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	var me = this,
     	    params = {
-                id_region_evento:  seltected[0].data.id_region_evento
+                id_movimiento:  seltected[0].data.id_movimiento
               
               };
               
@@ -181,14 +192,23 @@ Ext.define('pxp.controller.Ingreso', {
 		        
 		        withCredentials: true,
 	            useDefaultXhrHeader: false,
-	            url: pxp.apiRest._url('admin/Ingreso/eliminarBautizoSantaCena'),
+	            url: pxp.apiRest._url('admin/Movimiento/eliminarMovimiento'),
 		        params: params,
 		        method: 'POST',
 		        scope: me,
 		        success: function(resp){
 		        var Response = Ext.JSON.decode(resp.responseText);
 		           pxp.app.hideMask();
-		           me.getIngresolist().down('list').getStore().load({start:0,limit:20, page:1});
+		           
+		           if(Response.ROOT.error){
+		           	   alert(Response.ROOT.detalle.mensaje)
+		           }
+		           else{
+			           //mostrar y actualizar el panel de listado
+			           me.onBackList(); 
+			           me.getIngresolist().down('list').getStore().load({start:0,limit:20,page:1});
+		           }
+		          
 		         
 		        },
 		        failure:function(resp){
@@ -236,7 +256,7 @@ Ext.define('pxp.controller.Ingreso', {
     	if(!me.obrerocmp){
     		
     		var cmphidden = me.getIngresoform().down('#id_obrero'),
-    		    cmpText = me.getIngresoform().down('#nombre_obrero');
+    		    cmpText = me.getIngresoform().down('#desc_obrero');
     		
     	    me.obrerocmp = Ext.create('pxp.view.component.Obrero',{
 	    	   	'cmpHidden':cmphidden,

@@ -117,12 +117,15 @@ Ext.define('pxp.controller.RegionEvento', {
 		        success: function(resp){
 		           var Response = Ext.JSON.decode(resp.responseText);
 		           pxp.app.hideMask();
-		           //Ext.Msg.alert('Info...', Response.ROOT.detalle.mensaje, Ext.emptyFn);
 		           //mostrar y actualizar el panel de listado
-		           me.onBackList(); 
-		           me.getRegioneventolist().down('list').getStore().load({start:0,
-															    	  limit:20,
-															    	  page:1});
+		           if(Response.ROOT.error){
+		           	   alert(Response.ROOT.detalle.mensaje)
+		           }
+		           else{
+			           //mostrar y actualizar el panel de listado
+			           me.onBackList(); 
+			           me.getRegioneventolist().down('list').getStore().load({start:0,limit:20,page:1});
+		           }
 		        },
 		        failure:function(resp){
                     var Response = Ext.JSON.decode(resp.responseText);
@@ -162,7 +165,16 @@ Ext.define('pxp.controller.RegionEvento', {
 		        success: function(resp){
 		        var Response = Ext.JSON.decode(resp.responseText);
 		           pxp.app.hideMask();
-		           me.getRegioneventolist().down('list').getStore().load({start:0,limit:20, page:1});
+		           //mostrar y actualizar el panel de listado
+		           if(Response.ROOT.error){
+		           	   alert(Response.ROOT.detalle.mensaje)
+		           }
+		           else{
+			           //mostrar y actualizar el panel de listado
+			           me.onBackList(); 
+			           me.getRegioneventolist().down('list').getStore().load({start:0,limit:20,page:1});
+		           }
+		         
 		         
 		        },
 		        failure:function(resp){
