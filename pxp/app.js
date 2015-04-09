@@ -33,7 +33,8 @@ Ext.application({
         'interino.Interino',
         'vobowf.VoBoWf' ,
         'obrero.Obrero',
-        'regionevento.RegionEvento'        
+        'regionevento.RegionEvento',
+        'ingreso.Ingreso'      
     ],
     
     controllers : [
@@ -43,7 +44,8 @@ Ext.application({
         'VoBoWf',
         'VoBoFondo',
         'Obrero',
-        'RegionEvento'
+        'RegionEvento',
+        'Ingreso'
     ],
 
     icon: {
