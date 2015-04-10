@@ -3,10 +3,13 @@ session_start();
 session_set_cookie_params (0,'/', '' ,true ,true);
 ?>
 <!DOCTYPE HTML>
-<html manifest="cache.appcache" lang="es">
+<html manifest="cache.appcache" lang="en-US">
 <head>
     <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
     <title>CCB</title>
+    
     <style type="text/css">
          /**
          * Example of an initial loading indicator.
@@ -78,4 +81,3 @@ B("apple-mobile-web-app-capable","yes");B("apple-touch-fullscreen","yes");c?(b=n
     </div>
 </body>
 </html>
-
