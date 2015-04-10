@@ -1,4 +1,4 @@
-**
+/**
 * The picker with hours and minutes slots
 */
 Ext.define('Ext.ux.picker.Time', {

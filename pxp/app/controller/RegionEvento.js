@@ -51,7 +51,15 @@ Ext.define('pxp.controller.RegionEvento', {
             }
         } 
     },
-    
+    onFormEdit: function(list, index, target, record, e, eOpts){
+   	    this.getRegioneventoform().show();
+    	this.getRegioneventolist().hide();
+    	this.getRegioneventoform().reset(); 
+    	this.getRegioneventoform().setRecord(record);
+    	this.getRegioneventoform().down('title').setTitle('Editar Evento');
+    	
+    	
+   },
    onAdd:function(){
    
    	    this.getRegioneventolist().hide();
@@ -69,15 +77,7 @@ Ext.define('pxp.controller.RegionEvento', {
     
    
    
-   onFormEdit: function(list, index, target, record, e, eOpts){
-   	    this.getRegioneventoform().show();
-    	this.getRegioneventolist().hide();
-    	this.getRegioneventoform().reset(); 
-    	this.getRegioneventoform().setRecord(record);
-    	this.getRegioneventoform().down('title').setTitle('Editar Evento');
-    	
-    	
-   },
+   
     
    onSave:function(){
     	var me = this,
@@ -267,10 +267,10 @@ Ext.define('pxp.controller.RegionEvento', {
     	
     	
     	storeRegionevento.load({
-    		start:0,
-    		limit:20,
-    		page:1,
-    		callback:function(){
+    		start: 0,
+    		limit: 20,
+    		page: 1,
+    		callback: function(){
     		list.unmask();
     	}});
     	

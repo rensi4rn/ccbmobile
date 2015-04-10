@@ -14,8 +14,8 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
     xtype: 'regioneventoform',
     requires: [
         'Ext.field.Select',
-        'Ext.ux.picker.DateTime',
-        'Ext.ux.field.DateTimePicker',
+        'Ext.ux.picker.Time',
+        'Ext.ux.field.TimePicker',
         'Ext.field.Select',
         'Ext.field.Search',
         'Ext.Toolbar',
@@ -111,7 +111,7 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
 				        },
 				        items:[
 					        {
-			                    xtype: 'datetimepickerfield',
+			                    xtype: 'timepickerfield',
 			                    name : 'hora',
 			                    itemId : 'hora',
 			                    label: 'Hora',

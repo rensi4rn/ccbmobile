@@ -78,4 +78,3 @@ B("apple-mobile-web-app-capable","yes");B("apple-touch-fullscreen","yes");c?(b=n
     </div>
 </body>
 </html>
-
