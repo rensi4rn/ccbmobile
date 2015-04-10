@@ -19,7 +19,7 @@ Ext.define('pxp.model.Agenda', {
 						{name:'id_usuario_mod', type: 'numeric'},
 						{name:'usr_reg', type: 'string'},
 						{name:'usr_mod', type: 'string'},
-						'desc_gestion','desc_evento','desc_region','desc_casa_oracion','mes'	
+						'desc_gestion','desc_evento','desc_region','desc_casa_oracion','mes','hora'	
 					]
      }  
 });

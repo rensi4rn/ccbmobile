@@ -57,7 +57,7 @@ Ext.define('pxp.view.agenda.AgendaList', {
 						   "<td colspan=5 style='float: left;' width='100%'> {fecha_programada:date('j F, Y')} - <font size='2'>(Estado: {estado})</font></td>"+						   
 						  "</tr>"+
 						  "<tr>"+
-						   "<td colspan=5 style='float: left;' width='100%'> <font size='5'>({desc_evento})</font></td>"+						   
+						   "<td colspan=5 style='float: left;' width='100%'> <font size='5'>{desc_evento} ({hora})</font></td>"+						   
 						  "</tr>"+
 						  
 						  

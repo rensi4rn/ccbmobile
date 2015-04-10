@@ -27,11 +27,14 @@ Ext.define('pxp.view.obrero.ObreroList', {
     initialize:function(){
     	var me = this;
     	me.store = Ext.create('pxp.store.Obrero');
+    	
+    	
 	    
 	    me.add([
 	   	    {
 		   	    xtype: 'list',
 	            flex: 1,
+	            //cls:".x-item-selected a {color:#FFF;}",
 	            plugins: [
 	                    {
 	                        xclass: 'Ext.plugin.ListPaging',
@@ -56,10 +59,10 @@ Ext.define('pxp.view.obrero.ObreroList', {
 						   "<td colspan=2 style='float: left;' width='100%'> <b>{desc_casa_oracion}</b></td>",						   
 						  "</tr>",						  
 						  "<tr>",
-						    "<td colspan=2 style='float: left;' width='100%'>Telefono: {telefono1}</td>",
+						    "<td colspan=2 style='float: left;' width='100%'>Teléfono: <a href='tel:{telefono1}'>{telefono1}</a></td>",
 						  "</tr>",
 						  "<tr>",
-						    "<td colspan=2 style='float: left;' width='100%'>Celular: {celular1}</td>",
+						    "<td colspan=2 style='float: left;' width='100%'>Celular: <a  href='tel:{celular1}'>{celular1}</a></td>",
 						  "</tr>",
 						  "<tr>",
 						    "<td colspan=2 style='float: left;' width='100%'>Correo: {correo}</td>",

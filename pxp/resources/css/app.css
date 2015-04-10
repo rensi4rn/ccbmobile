@@ -6591,7 +6591,15 @@ body.x-desktop {
 /* line 100, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/dataview/_List.scss */
 .x-list-normal .x-list-item.x-item-selected.x-list-item-tpl, .x-list-normal .x-list-item.x-item-selected .x-dock-horizontal {
   border-top-color: #006bb6;
+  
+  
 }
+/*SE cambia el estilo para rul ....*/
+.x-list-normal .x-list-item.x-item-selected a{
+	color:#fff;
+}
+
+
 
 /* line 108, /Users/jamieavins/git/SDK/touch/resources/themes/stylesheets/sencha-touch/default/src/dataview/_List.scss */
 .x-list-round .x-scroll-view {

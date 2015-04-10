@@ -9,6 +9,8 @@ if ($_SERVER['SERVER_PORT']!='443') {
 <html manifest="" lang="en-US">
 <head>
     <meta charset="UTF-8">
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
     <title>CCB</title>
     
     <style type="text/css">
