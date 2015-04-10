@@ -3,7 +3,7 @@ session_start();
 session_set_cookie_params (0,'/', '' ,true ,true);
 ?>
 <!DOCTYPE HTML>
-<html manifest="cache.appcache" lang="ES-BO">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>CCB</title>
@@ -78,4 +78,3 @@ B("apple-mobile-web-app-capable","yes");B("apple-touch-fullscreen","yes");c?(b=n
     </div>
 </body>
 </html>
-

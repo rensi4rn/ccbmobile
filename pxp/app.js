@@ -34,7 +34,9 @@ Ext.application({
         'vobowf.VoBoWf' ,
         'obrero.Obrero',
         'regionevento.RegionEvento',
-        'ingreso.Ingreso'      
+        'ingreso.Ingreso',
+        'egreso.Egreso',
+        'agenda.Agenda'      
     ],
     
     controllers : [
@@ -45,7 +47,9 @@ Ext.application({
         'VoBoFondo',
         'Obrero',
         'RegionEvento',
-        'Ingreso'
+        'Ingreso',
+        'Egreso',
+        'Agenda'
     ],
 
     icon: {

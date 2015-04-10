@@ -5,67 +5,67 @@
  * The only controller in this simple application - this simply sets up the fullscreen viewport panel
  * and renders a detailed overlay whenever a Loan is tapped on.
  */
-Ext.define('pxp.controller.Ingreso', {
+Ext.define('pxp.controller.Agenda', {
     extend: 'Ext.app.Controller',
     config: {
         profile: Ext.os.deviceType.toLowerCase(),
         
         models: [
-            'pxp.model.Ingreso'
+            'pxp.model.Agenda'
         ],
         stores: [
           // 'emsysMobile.store.Customers'
         ],
 
         refs: {
-            ingresolist: 'ingresolist',
-            ingresotbar: 'ingresotbar',
-            ingresoform:'ingresoform',
-            ingresoformfilter:'ingresoformfilter'
+            agendalist: 'agendalist',
+            agendatbar: 'agendatbar',
+            agendaform:'agendaform',
+            agendaformfilter:'agendaformfilter'
         },
 
         control: {
-            'ingresolist list': {
+            'agendalist list': {
                 itemdoubletap: 'onFormEdit'
             },
-            'ingresotbar #addingreso': {
+            'agendatbar #addingreso': {
                 tap: 'onAdd'
             },
-            'ingresotbar #deleteingeso': {
+            'agendatbar #deleteingeso': {
                 tap: 'onDelete'
             },
             
-            'ingresoform #back':{
+            'agendaform #back': {
             	tap:'onBackList'
             },
             
-            'ingresotbar #backfilter':{
+            'agendatbar #backfilter': {
             	tap:'onBackFilter'
             },            
-            'ingresotbar #searchfComponent':{
+            'agendatbar #searchfComponent': {
             	action: 'onActiveFilter',
             	clearicontap: 'onClearFilter'
             },
             
-            'ingresoform #obrerobutton':{
+            'agendaform #obrerobutton': {
             	tap:'onTapListObrero'
             },
             
-            'ingresoform #eventobutton':{
+            'agendaform #eventobutton': {
             	tap:'onTapListEvento'
             },
             
-            'ingresoform #save':{
+            'agendaform #save': {
             	tap:'onSave'
             },
             
-            'ingresoformfilter #casaoracionbutton':{
-            	tap:'onTapListCasaOracion'
+            'agendaformfilter #lugarbutton': {
+            	tap:'onTapListLugar'
             },
-            'ingresoformfilter #gestionbutton':{
+            'agendaformfilter #gestionbutton': {
             	tap:'onTapListGestion'
             },
-            'ingresoformfilter #aplicar':{
+            'agendaformfilter #aplicar': {
             	tap:'onInitFilter'
             }
             
@@ -79,12 +79,12 @@ Ext.define('pxp.controller.Ingreso', {
     
    onAdd:function(){
    	
-   	    this.getIngresolist().hide();
-     	this.getIngresoform().show();
-     	this.getIngresoform().down('title').setTitle('Nuevo Evento');
-     	this.getIngresoform().reset();
-     	var ges = parseInt(this.getIngresoformfilter().down('#gestion').getValue())//,
-     	    picker = this.getIngresoform().down('#fecha').getPicker();
+   	    this.getAgendalist().hide();
+     	this.getAgendaform().show();
+     	this.getAgendaform().down('title').setTitle('Nuevo Evento');
+     	this.getAgendaform().reset();
+     	var ges = parseInt(this.getAgendaformfilter().down('#gestion').getValue())//,
+     	    picker = this.getAgendaform().down('#fecha').getPicker();
      	
      	if(picker){
      		picker.setYearFrom(ges*1);
@@ -96,8 +96,8 @@ Ext.define('pxp.controller.Ingreso', {
    },
    onBackList:function(){
    	    
-   	    this.getIngresoform().hide();
-    	this.getIngresolist().show();
+   	    this.getAgendaform().hide();
+    	this.getAgendalist().show();
      	
    },
    
@@ -107,11 +107,11 @@ Ext.define('pxp.controller.Ingreso', {
    
    
    onFormEdit: function(list, index, target, record, e, eOpts){
-   	    this.getIngresoform().show();
-    	this.getIngresolist().hide();
-    	this.getIngresoform().reset(); 
-    	this.getIngresoform().setRecord(record);
-    	this.getIngresoform().down('title').setTitle('Editar Ingreso');
+   	    this.getAgendaform().show();
+    	this.getAgendalist().hide();
+    	this.getAgendaform().reset(); 
+    	this.getAgendaform().setRecord(record);
+    	this.getAgendaform().down('title').setTitle('Editar Ingreso');
     	
     	
    },
@@ -119,12 +119,12 @@ Ext.define('pxp.controller.Ingreso', {
    onSave:function(){
     	
     	var me = this,
-    	    fecha = me.getIngresoform().down('#fecha'),
-    	    estado = me.getIngresoform().down('#estado'),
-    	    params =  me.getIngresoform().getValues(),
-    	    id_obrero = me.getIngresoform().down('#id_obrero'),
-    	    id_casa_oracion = me.getIngresoformfilter().down('#id_casa_oracion').getValue(),
-            id_gestion = me.getIngresoformfilter().down('#id_gestion').getValue();
+    	    fecha = me.getAgendaform().down('#fecha'),
+    	    estado = me.getAgendaform().down('#estado'),
+    	    params =  me.getAgendaform().getValues(),
+    	    id_obrero = me.getAgendaform().down('#id_obrero'),
+    	    id_casa_oracion = me.getAgendaformfilter().down('#id_casa_oracion').getValue(),
+            id_gestion = me.getAgendaformfilter().down('#id_gestion').getValue();
         
         params  = Ext.apply(params,{obs:'', tipo: 'ingreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
        
@@ -157,7 +157,7 @@ Ext.define('pxp.controller.Ingreso', {
 		           else{
 			           //mostrar y actualizar el panel de listado
 			           me.onBackList(); 
-			           me.getIngresolist().down('list').getStore().load({start:0,limit:20,page:1});
+			           me.getAgendalist().down('list').getStore().load({start:0,limit:20,page:1});
 		           }
 		           
 		        },
@@ -172,7 +172,7 @@ Ext.define('pxp.controller.Ingreso', {
    onDelete:function(){
     	
     	
-    	var seltected = this.getIngresolist().down('list').getSelection();
+    	var seltected = this.getAgendalist().down('list').getSelection();
     	
     	if(seltected.length == 0){
     	    Ext.Msg.alert('Info ...','Selecione una fila primero');
@@ -206,7 +206,7 @@ Ext.define('pxp.controller.Ingreso', {
 		           else{
 			           //mostrar y actualizar el panel de listado
 			           me.onBackList(); 
-			           me.getIngresolist().down('list').getStore().load({start:0,limit:20,page:1});
+			           me.getAgendalist().down('list').getStore().load({start:0,limit:20,page:1});
 		           }
 		          
 		         
@@ -226,8 +226,8 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	if(!me.eventocmp){
     		
-    		var cmphidden = me.getIngresoform().down('#id_evento'),
-    		    cmpText =me.getIngresoform().down('#nombre');
+    		var cmphidden = me.getAgendaform().down('#id_evento'),
+    		    cmpText =me.getAgendaform().down('#nombre');
     		
     	    me.eventocmp = Ext.create('pxp.view.component.Evento',{
 	    	   	'cmpHidden': cmphidden,
@@ -255,8 +255,8 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	if(!me.obrerocmp){
     		
-    		var cmphidden = me.getIngresoform().down('#id_obrero'),
-    		    cmpText = me.getIngresoform().down('#desc_obrero');
+    		var cmphidden = me.getAgendaform().down('#id_obrero'),
+    		    cmpText = me.getAgendaform().down('#desc_obrero');
     		
     	    me.obrerocmp = Ext.create('pxp.view.component.Obrero',{
 	    	   	'cmpHidden':cmphidden,
@@ -283,8 +283,8 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	if(!me.casaoracioncmp){
     		
-    		var cmphidden = me.getIngresoformfilter().down('#id_casa_oracion'),
-    		    cmpText = me.getIngresoformfilter().down('#nombre_co');
+    		var cmphidden = me.getAgendaformfilter().down('#id_casa_oracion'),
+    		    cmpText = me.getAgendaformfilter().down('#nombre_co');
     		
     	    me.casaoracioncmp = Ext.create('pxp.view.component.CasaOracion',{
 	    	   	'cmpHidden':cmphidden,
@@ -306,13 +306,41 @@ Ext.define('pxp.controller.Ingreso', {
     	
     },
     
+    onTapListLugar: function(){
+    	var me = this;
+    	
+    	if(!me.lugarcmp){
+    		
+    		var cmphidden = me.getAgendaformfilter().down('#id_lugar'),
+    		    cmpText = me.getAgendaformfilter().down('#nombre');
+    		
+    	    me.lugarcmp = Ext.create('pxp.view.component.Lugar',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText,
+	    	   	'displayColumn':'nombre',
+	    	   	'idColumn':'id_lugar'
+    	   });
+    	   
+    	   Ext.Viewport.add(me.lugarcmp);
+    	}
+    	
+    	var  store = me.lugarcmp.down('list').getStore();
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	me.lugarcmp.show();
+    	
+    }, 
+    
     onTapListGestion:function(){
     	var me = this;
     	
     	if(!me.gestioncmp){
     		console.log('1')
-    		var cmphidden = me.getIngresoformfilter().down('#id_gestion'),
-    		    cmpText = me.getIngresoformfilter().down('#gestion');
+    		var cmphidden = me.getAgendaformfilter().down('#id_gestion'),
+    		    cmpText = me.getAgendaformfilter().down('#gestion');
     		me.gestioncmp = Ext.create('pxp.view.component.Gestion',{
 	    	   	'cmpHidden':cmphidden,
 	    	   	'cmpText':cmpText,
@@ -336,29 +364,30 @@ Ext.define('pxp.controller.Ingreso', {
     
     onBackFilter:function(){
    	    
-   	    this.getIngresolist().hide();
-    	this.getIngresoformfilter().show();
+   	    this.getAgendalist().hide();
+    	this.getAgendaformfilter().show();
      	
     },
     
     onInitFilter:function(){
     	var me = this,
-    	    store = me.getIngresolist().down('list').getStore(),
-    	    formfilter = this.getIngresoformfilter(),
-    	    id_casa_oracion = formfilter.down('#id_casa_oracion').getValue(),
+    	    store = me.getAgendalist().down('list').getStore(),
+    	    formfilter = this.getAgendaformfilter(),
+    	    id_lugar = formfilter.down('#id_lugar').getValue(),
     	    id_gestion = formfilter.down('#id_gestion').getValue();
     	
-    	if(id_casa_oracion && id_gestion){
+    	if(id_lugar && id_gestion){
     		
-    		me.getIngresolist().show();
-		    me.getIngresolist().down('list').mask(); 
-		    me.getIngresoformfilter().hide();
+    		me.getAgendalist().show();
+		    me.getAgendalist().down('list').mask(); 
+		    me.getAgendaformfilter().hide();
 	    
 	    	store.getProxy().setExtraParams({
-	    		     'id_casa_oracion': id_casa_oracion,
+	    		     'id_lugar': id_lugar,
 	    		     'id_gestion': id_gestion,
+	    		     'tipo_registro': 'detalle',
 	    		     'tipolist': 'mobile',
-	    		     'sort':"fecha",
+	    		     'sort':"fecha_programada",
 	    		     "dir":"DESC"
 				});
 				
@@ -366,62 +395,21 @@ Ext.define('pxp.controller.Ingreso', {
 	    		start:0,
 	    		limit:20,
 	    		page:1,
-	    		scope: me,
-	    		callback: me.calcularResumenfunction});	
+	    		scope: me});	
     	}
     	
     },
     
-    calcularResumenfunction: function(records, operation, success){
-	    		    var me = this,
-	    		        Response = Ext.JSON.decode(operation._response.responseText);
-	    			console.log('Response',Response.countData);
-	    			var tpl = new Ext.XTemplate('<div><table width="100%">'+
-	    			      "<tr>"+
-						    "<td colspan='3' style='float: left;' width='100%'><hr></hr></td>"+
-						  "</tr>"+
-	    			      "<tr>"+
-						    "<td style='float: left;' width='33%'><b>Mant.</b></td>"+
-						    "<td style='float: left;' width='33%'><b>Const.</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>Viaje</b></td>"+ 
-						  "</tr>"+
-						  "<tr>"+
-						    "<td style='float: left;' width='33%'><b>{total_mantenimiento}</b></td>"+
-						    "<td style='float: left;' width='33%'><b>{total_construccion}</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>{total_viaje}</b></td>"+ 
-						  "</tr>"+
-						  "<tr>"+
-						   "<td style='float: left;' width='33%'><b>Espec.</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>Piedad</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>TOTAL</b></td>"+ 
-						  "</tr>"+
-						  "<tr>"+
-						    "<td style='float: left;' width='33%'><b>{total_especial}</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>{total_piedad}</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b><font color='green'>{total_dia}</font></b></td>"+ 
-						  "</tr>"+
-						  "</table></div>");
-						  
-						  
-	    			
-	    			me.getIngresolist().down('#resumenIngreso').setHtml(tpl.apply(Response.countData));
-	    			
-	    			me.getIngresolist().down('list').unmask();
-	    		
-	},
+    
     	
     onActiveFilter:function(searchField){
     	var me = this,
-    	    store = me.getIngresolist().down('list').getStore();
+    	    store = me.getAgendalist().down('list').getStore();
     	    
     	var extra = store.getProxy().getExtraParams();
     	
-    	
-    	
-    	
-    	console.log('........',extra, 'value.....',searchField.getValue())
     	store.getProxy().setExtraParams(Ext.apply(extra, {
-    		     "par_filtro": "mov.desc_obrero#mov.estado#mov.mes",
+    		     "par_filtro": "rege.estado#ep.mes#co.nombre#lug.nombre#reg.nombre#eve.nombre",
 			     "query": searchField.getValue()
 			}));
 			
@@ -429,13 +417,12 @@ Ext.define('pxp.controller.Ingreso', {
     		start:0,
     		limit:20,
     		page:1,
-    		scope: me,
-    		callback: me.calcularResumenfunction});
+    		scope: me});
     },
     
     onClearFilter:function(value){
     	var me = this,
-    	    store = me.getIngresolist().down('list').getStore();
+    	    store = me.getAgendalist().down('list').getStore();
     	    extra = store.getProxy().getExtraParams();
     	    
     	delete extra.par_filtro;
@@ -446,8 +433,7 @@ Ext.define('pxp.controller.Ingreso', {
     		start:0,
     		limit:20,
     		page:1,
-    		scope: me,
-    		callback: me.calcularResumenfunction});
+    		scope: me});
     }
     
 });

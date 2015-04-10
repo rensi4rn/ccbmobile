@@ -9,22 +9,21 @@
  * Loans based on the values selected (see the onFilter method in app/controllers/loans.js).
  *
  */
-Ext.define('pxp.view.ingreso.IngresoForm', {
+Ext.define('pxp.view.egreso.EgresoForm', {
     extend: 'Ext.form.Panel',
-    xtype: 'ingresoform',
+    xtype: 'egresoform',
     requires: [
         'Ext.field.Select',
         'Ext.field.Search',
         'Ext.Toolbar',
         'Ext.plugin.ListPaging',
         'Ext.plugin.PullRefresh',
-        'pxp.view.component.Obrero'
+        'pxp.view.component.Obrero',
+        'pxp.view.component.TipoMovimiento'
     ],
     
     config: {
     	ui: 'light',
-    	//scroll: true,
-    	//fullscreen: true,
     	scrollable : false,
     	showAnimation: { type: "slide", direction: "down" } ,
         items: [
@@ -71,33 +70,9 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 				     },
 				     {
 				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento_det_mantenimiento',
-				                name: 'id_movimiento_det_mantenimiento'
+				                itemId: 'id_movimiento_det',
+				                name: 'id_movimiento_det'
 				     },
-				     {
-				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento_det_piedad',
-				                name: 'id_movimiento_det_piedad'
-				    
-				    },
-				     {
-				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento_det_construccion',
-				                name: 'id_movimiento_det_construccion'
-				    
-				    },
-				     {
-				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento_det_viaje',
-				                name: 'id_movimiento_det_viaje'
-				    
-				    },
-				     {
-				                xtype:  'hiddenfield',
-				                itemId: 'id_movimiento_det_especial',
-				                name: 'id_movimiento_det_especial'
-				    
-				    },
 				    
 		            {
 			           	xtype: 'fieldset',
@@ -157,6 +132,37 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 				             }
 				         ]
 				     },
+		            {
+			           	xtype: 'fieldset',
+			           	margin:'5 5 5 5',
+			           	//flex: 1 ,
+		                layout: {
+				            type: 'hbox',
+				            align: 'stretch'
+				        },
+				        items:[
+				             {
+				                xtype: 'hiddenfield',
+				                itemId:'id_tipo_movimiento',
+				                name:'id_tipo_movimiento'
+				             },
+				             {
+				                xtype: 'textfield',
+				                labelWidth:100,
+				                label: 'Tipo Movimiento',
+				                name:'desc_tipo_movimiento',
+				                flex: Ext.os.is.Phone?1:undefined,
+				                itemId:'desc_tipo_movimiento',
+				                readOnly:true
+				                
+				             },
+				             {
+				                xtype: 'button',
+				                itemId: 'tipomovimientobutton',
+				                iconCls: 'ico-customers-small'
+				             }
+				         ]
+				     },
 				     
 				     {
 			           	xtype: 'fieldset',
@@ -176,11 +182,9 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 		                        displayField: 'title',
 		                        store: {
 		                            data: [
-		                                { codigo: 'colecta_adultos', title: 'Colecta de Adultos'},
-		                                { codigo: 'colecta_jovenes', title: 'Colecta de Jovenes'},
-		                                { codigo: 'ingreso_trapaso', title: 'Ingreso por Trapaso'},
-		                                { codigo: 'colecta_especial', title: 'Colecta Especial'},
-		                                { codigo: 'saldo_inicial', title: 'Saldo Inicial'}
+		                                
+		                                { codigo: 'operacion', title: 'Operacion'},
+		                                { codigo: 'egreso_traspaso', title: 'Egreso por Traspaso'}
 		                            ]
 		                        }
 		                     }
@@ -224,10 +228,55 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 				        items:[
 					           {
 			                        xtype: 'numberfield',
-			                        name: 'monto_mantenimiento',
-			                        itemId:'monto_mantenimiento',
+			                        name: 'monto',
+			                        itemId:'monto',
 			                        minValue : 0,
-			                        label: 'Mantenimineto'
+			                        label: 'Monto'
+			                    }
+		                 ]
+		             },
+		             {
+			           	xtype: 'fieldset',
+			           	margin:'5 5 5 5',
+			           	//flex: 1 ,
+		                layout: {
+				            type: Ext.os.is.Phone?'vbox':'hbox',
+				            align: 'stretch'
+				        },
+				        items:[
+					        {
+		                        xtype: 'selectfield',
+		                        name: 'tipo_documento',
+		                        itemId:'tipo_documento',
+		                        label: 'Documento',
+		                        valueField: 'codigo',
+		                        displayField: 'title',
+		                        store: {
+		                            data: [
+		                                { codigo: 'factura', title: 'Factura'},
+		                                { codigo: 'recibo_bien', title: 'Recibo de Bien'},
+		                                { codigo: 'recibo_servicio', title: 'Recibo de Servicio'}
+		                            ]
+		                        }
+		                     }
+		                 ]
+		             },
+				     
+				     {
+			           	xtype: 'fieldset',
+			           	margin:'5 5 5 5',
+			           	//flex: 1 ,
+		                layout: {
+				            type: Ext.os.is.Phone?'vbox':'hbox',
+				            align: 'stretch'
+				        },
+				        items:[
+					           {
+			                        xtype: 'textfield',
+			                        name: 'num_documento',
+			                        itemId:'num_documento',
+			                        minValue : 0,
+			                        label: 'Número'
 			                    }
 		                 ]
 		             },
@@ -241,76 +290,17 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 				            align: 'stretch'
 				        },
 				        items:[
-					        {
-			                        xtype: 'numberfield',
-			                        name: 'monto_piedad',
-			                        itemId:'monto_piedad',
-			                        stepValue: 1,
-			                        minValue : 0,
-			                        label: 'Piedad'
-			                    }
-		                 ]
-		             },
-				     
-				     {
-			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: Ext.os.is.Phone?'vbox':'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-					        {
-			                        xtype: 'numberfield',
-			                        name: 'monto_construccion',
-			                        itemId:'monto_construccion',
-			                        stepValue: 1,
-			                        minValue : 0,
-			                        label: 'Construcción'
-			                    }
-		                 ]
-		             },
-				     
-				     {
-			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: Ext.os.is.Phone?'vbox':'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-					        {
-			                        xtype: 'numberfield',
-			                        name: 'monto_viaje',
-			                        itemId:'monto_viaje',
-			                        stepValue: 1,
-			                        minValue : 0,
-			                        label: 'Viaje'
-			                    }
-		                 ]
-		             },
-				     
-				     {
-			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: Ext.os.is.Phone?'vbox':'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-					        {
-			                        xtype: 'numberfield',
-			                        name: 'monto_especial',
-			                        itemId:'monto_especial',
-			                        stepValue: 1,
-			                        minValue : 0,
-			                        label: 'Especial'
+					           {
+			                        xtype: 'textareafield',
+			                        name: 'obs',
+			                        itemId:'obs',
+			                        label: 'Obs'
 			                    }
 		                 ]
 		             }
+		             
+		             
+				     
                      
                  ]
            	

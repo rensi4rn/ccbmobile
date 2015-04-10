@@ -9,9 +9,9 @@
  * Loans based on the values selected (see the onFilter method in app/controllers/loans.js).
  *
  */
-Ext.define('pxp.view.ingreso.IngresoForm', {
+Ext.define('pxp.view.agenda.AgendaForm', {
     extend: 'Ext.form.Panel',
-    xtype: 'ingresoform',
+    xtype: 'agendaform',
     requires: [
         'Ext.field.Select',
         'Ext.field.Search',

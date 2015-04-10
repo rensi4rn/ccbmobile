@@ -5,67 +5,71 @@
  * The only controller in this simple application - this simply sets up the fullscreen viewport panel
  * and renders a detailed overlay whenever a Loan is tapped on.
  */
-Ext.define('pxp.controller.Ingreso', {
+Ext.define('pxp.controller.Egreso', {
     extend: 'Ext.app.Controller',
     config: {
         profile: Ext.os.deviceType.toLowerCase(),
         
         models: [
-            'pxp.model.Ingreso'
+            'pxp.model.Egreso'
         ],
         stores: [
           // 'emsysMobile.store.Customers'
         ],
 
         refs: {
-            ingresolist: 'ingresolist',
-            ingresotbar: 'ingresotbar',
-            ingresoform:'ingresoform',
-            ingresoformfilter:'ingresoformfilter'
+            egresolist: 'egresolist',
+            egresotbar: 'egresotbar',
+            egresoform: 'egresoform',
+            egresoformfilter: 'egresoformfilter'
         },
 
         control: {
-            'ingresolist list': {
+            'egresolist list': {
                 itemdoubletap: 'onFormEdit'
             },
-            'ingresotbar #addingreso': {
+            'egresotbar #addegreso': {
                 tap: 'onAdd'
             },
-            'ingresotbar #deleteingeso': {
+            'egresotbar #deleteegreso': {
                 tap: 'onDelete'
             },
             
-            'ingresoform #back':{
+            'egresoform #back':{
             	tap:'onBackList'
             },
             
-            'ingresotbar #backfilter':{
+            'egresotbar #backfilter':{
             	tap:'onBackFilter'
             },            
-            'ingresotbar #searchfComponent':{
+            'egresotbar #searchfComponent':{
             	action: 'onActiveFilter',
             	clearicontap: 'onClearFilter'
             },
             
-            'ingresoform #obrerobutton':{
+            'egresoform #obrerobutton':{
             	tap:'onTapListObrero'
             },
             
-            'ingresoform #eventobutton':{
+            'egresoform #tipomovimientobutton':{
+            	tap:'onTapListTipoMovimiento'
+            },
+            
+            'egresoform #eventobutton':{
             	tap:'onTapListEvento'
             },
             
-            'ingresoform #save':{
+            'egresoform #save':{
             	tap:'onSave'
             },
             
-            'ingresoformfilter #casaoracionbutton':{
+            'egresoformfilter #casaoracionbutton':{
             	tap:'onTapListCasaOracion'
             },
-            'ingresoformfilter #gestionbutton':{
+            'egresoformfilter #gestionbutton':{
             	tap:'onTapListGestion'
             },
-            'ingresoformfilter #aplicar':{
+            'egresoformfilter #aplicar':{
             	tap:'onInitFilter'
             }
             
@@ -79,12 +83,12 @@ Ext.define('pxp.controller.Ingreso', {
     
    onAdd:function(){
    	
-   	    this.getIngresolist().hide();
-     	this.getIngresoform().show();
-     	this.getIngresoform().down('title').setTitle('Nuevo Evento');
-     	this.getIngresoform().reset();
-     	var ges = parseInt(this.getIngresoformfilter().down('#gestion').getValue())//,
-     	    picker = this.getIngresoform().down('#fecha').getPicker();
+   	    this.getEgresolist().hide();
+     	this.getEgresoform().show();
+     	this.getEgresoform().down('title').setTitle('Nuevo Egreso');
+     	this.getEgresoform().reset();
+     	var ges = parseInt(this.getEgresoformfilter().down('#gestion').getValue())//,
+     	    picker = this.getEgresoform().down('#fecha').getPicker();
      	
      	if(picker){
      		picker.setYearFrom(ges*1);
@@ -96,8 +100,8 @@ Ext.define('pxp.controller.Ingreso', {
    },
    onBackList:function(){
    	    
-   	    this.getIngresoform().hide();
-    	this.getIngresolist().show();
+   	    this.getEgresoform().hide();
+    	this.getEgresolist().show();
      	
    },
    
@@ -107,11 +111,11 @@ Ext.define('pxp.controller.Ingreso', {
    
    
    onFormEdit: function(list, index, target, record, e, eOpts){
-   	    this.getIngresoform().show();
-    	this.getIngresolist().hide();
-    	this.getIngresoform().reset(); 
-    	this.getIngresoform().setRecord(record);
-    	this.getIngresoform().down('title').setTitle('Editar Ingreso');
+   	    this.getEgresoform().show();
+    	this.getEgresolist().hide();
+    	this.getEgresoform().reset(); 
+    	this.getEgresoform().setRecord(record);
+    	this.getEgresoform().down('title').setTitle('Editar Egreso');
     	
     	
    },
@@ -119,32 +123,59 @@ Ext.define('pxp.controller.Ingreso', {
    onSave:function(){
     	
     	var me = this,
-    	    fecha = me.getIngresoform().down('#fecha'),
-    	    estado = me.getIngresoform().down('#estado'),
-    	    params =  me.getIngresoform().getValues(),
-    	    id_obrero = me.getIngresoform().down('#id_obrero'),
-    	    id_casa_oracion = me.getIngresoformfilter().down('#id_casa_oracion').getValue(),
-            id_gestion = me.getIngresoformfilter().down('#id_gestion').getValue();
-        
-        params  = Ext.apply(params,{obs:'', tipo: 'ingreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
+    	    fecha = me.getEgresoform().down('#fecha'),
+    	    monto = me.getEgresoform().down('#monto'),
+    	    obs = me.getEgresoform().down('#obs'),
+    	    num_documento = me.getEgresoform().down('#num_documento'),
+    	    estado = me.getEgresoform().down('#estado'),
+    	    
+    	    id_obrero = me.getEgresoform().down('#id_obrero'),
+    	    id_tipo_movimiento = me.getEgresoform().down('#id_tipo_movimiento'),
+    	    id_casa_oracion = me.getEgresoformfilter().down('#id_casa_oracion').getValue(),
+            id_gestion = me.getEgresoformfilter().down('#id_gestion').getValue(),
+            params =  me.getEgresoform().getValues();
+            
+        params  = Ext.apply(params,{ tipo: 'egreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
        
         
         if(!fecha.getValue()){
          	alert('Necesitamos que indique la fecha', Ext.emptyFn);
             return;
-        } 
+        }
         
         if(!id_obrero.getValue()){
          	alert('Indique un obrero responsable', Ext.emptyFn);
             return;
-        }   
-             
-            
+        } 
+        
+        if(!id_tipo_movimiento.getValue()){
+         	alert( 'Es necesario indicar el tipo de movimiento', Ext.emptyFn);
+            return;
+        } 
+        
+        if(!monto.getValue()){
+         	alert('El monto es necesario', Ext.emptyFn);
+            return;
+        }
+        
+               
+        if(!num_documento.getValue()){
+         	alert('Es necesario indicar el numero de recibo o factura', Ext.emptyFn);
+            return;
+        } 
+        
+        if(!obs.getValue()){
+         	alert( 'Es necesario indicar que se compro (Obs)', Ext.emptyFn);
+            return;
+        } 
+        
+        
+          
         pxp.app.showMask();      
     	Ext.Ajax.request({
 		        withCredentials: true,
 	            useDefaultXhrHeader: false,
-	            url: pxp.apiRest._url('admin/Movimiento/insertarMovimientoIngreso'),
+	            url: pxp.apiRest._url('admin/Movimiento/insertarMovimientoEgreso'),
 		        params: params,
 		        method: 'POST',
 		        scope: me,
@@ -157,7 +188,7 @@ Ext.define('pxp.controller.Ingreso', {
 		           else{
 			           //mostrar y actualizar el panel de listado
 			           me.onBackList(); 
-			           me.getIngresolist().down('list').getStore().load({start:0,limit:20,page:1});
+			           me.getEgresolist().down('list').getStore().load({start:0,limit:20,page:1});
 		           }
 		           
 		        },
@@ -172,7 +203,7 @@ Ext.define('pxp.controller.Ingreso', {
    onDelete:function(){
     	
     	
-    	var seltected = this.getIngresolist().down('list').getSelection();
+    	var seltected = this.getEgresolist().down('list').getSelection();
     	
     	if(seltected.length == 0){
     	    Ext.Msg.alert('Info ...','Selecione una fila primero');
@@ -206,7 +237,7 @@ Ext.define('pxp.controller.Ingreso', {
 		           else{
 			           //mostrar y actualizar el panel de listado
 			           me.onBackList(); 
-			           me.getIngresolist().down('list').getStore().load({start:0,limit:20,page:1});
+			           me.getEgresolist().down('list').getStore().load({start:0,limit:20,page:1});
 		           }
 		          
 		         
@@ -226,8 +257,8 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	if(!me.eventocmp){
     		
-    		var cmphidden = me.getIngresoform().down('#id_evento'),
-    		    cmpText =me.getIngresoform().down('#nombre');
+    		var cmphidden = me.getEgresoform().down('#id_evento'),
+    		    cmpText =me.getEgresoform().down('#nombre');
     		
     	    me.eventocmp = Ext.create('pxp.view.component.Evento',{
 	    	   	'cmpHidden': cmphidden,
@@ -255,8 +286,8 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	if(!me.obrerocmp){
     		
-    		var cmphidden = me.getIngresoform().down('#id_obrero'),
-    		    cmpText = me.getIngresoform().down('#desc_obrero');
+    		var cmphidden = me.getEgresoform().down('#id_obrero'),
+    		    cmpText = me.getEgresoform().down('#desc_obrero');
     		
     	    me.obrerocmp = Ext.create('pxp.view.component.Obrero',{
 	    	   	'cmpHidden':cmphidden,
@@ -278,19 +309,47 @@ Ext.define('pxp.controller.Ingreso', {
     	
     },
     
+    onTapListTipoMovimiento: function(){
+    	var me = this;
+    	if(!me.tipomovimientocmp){
+    		var cmphidden = me.getEgresoform().down('#id_tipo_movimiento'),
+    		    cmpText = me.getEgresoform().down('#desc_tipo_movimiento');
+    		
+    		me.tipomovimientocmp = Ext.create('pxp.view.component.TipoMovimiento',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText,
+	    	   	'displayColumn':'nombre',
+	    	   	'idColumn':'id_tipo_movimiento'
+    	   });
+    	   
+    	   Ext.Viewport.add(me.tipomovimientocmp);
+    	}
+    	
+    	var  store = me.tipomovimientocmp.down('list').getStore();
+    	
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	
+    	me.tipomovimientocmp.show();
+    	
+   },
+    
    onTapListCasaOracion:function(){
     	var me = this;
     	
     	if(!me.casaoracioncmp){
     		
-    		var cmphidden = me.getIngresoformfilter().down('#id_casa_oracion'),
-    		    cmpText = me.getIngresoformfilter().down('#nombre_co');
+    		var cmphidden = me.getEgresoformfilter().down('#id_casa_oracion'),
+    		    cmpText = me.getEgresoformfilter().down('#nombre_co');
     		
     	    me.casaoracioncmp = Ext.create('pxp.view.component.CasaOracion',{
-	    	   	'cmpHidden':cmphidden,
-	    	   	'cmpText':cmpText,
-	    	   	'displayColumn':'nombre',
-	    	   	'idColumn':'id_casa_oracion'
+	    	   	'cmpHidden': cmphidden,
+	    	   	'cmpText': cmpText,
+	    	   	'displayColumn': 'nombre',
+	    	   	'idColumn': 'id_casa_oracion'
     	   });
     	   
     	   Ext.Viewport.add(me.casaoracioncmp);
@@ -311,8 +370,8 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	if(!me.gestioncmp){
     		console.log('1')
-    		var cmphidden = me.getIngresoformfilter().down('#id_gestion'),
-    		    cmpText = me.getIngresoformfilter().down('#gestion');
+    		var cmphidden = me.getEgresoformfilter().down('#id_gestion'),
+    		    cmpText = me.getEgresoformfilter().down('#gestion');
     		me.gestioncmp = Ext.create('pxp.view.component.Gestion',{
 	    	   	'cmpHidden':cmphidden,
 	    	   	'cmpText':cmpText,
@@ -336,23 +395,23 @@ Ext.define('pxp.controller.Ingreso', {
     
     onBackFilter:function(){
    	    
-   	    this.getIngresolist().hide();
-    	this.getIngresoformfilter().show();
+   	    this.getEgresolist().hide();
+    	this.getEgresoformfilter().show();
      	
     },
     
     onInitFilter:function(){
     	var me = this,
-    	    store = me.getIngresolist().down('list').getStore(),
-    	    formfilter = this.getIngresoformfilter(),
+    	    store = me.getEgresolist().down('list').getStore(),
+    	    formfilter = this.getEgresoformfilter(),
     	    id_casa_oracion = formfilter.down('#id_casa_oracion').getValue(),
     	    id_gestion = formfilter.down('#id_gestion').getValue();
     	
     	if(id_casa_oracion && id_gestion){
     		
-    		me.getIngresolist().show();
-		    me.getIngresolist().down('list').mask(); 
-		    me.getIngresoformfilter().hide();
+    		me.getEgresolist().show();
+		    me.getEgresolist().down('list').mask(); 
+		    me.getEgresoformfilter().hide();
 	    
 	    	store.getProxy().setExtraParams({
 	    		     'id_casa_oracion': id_casa_oracion,
@@ -378,41 +437,23 @@ Ext.define('pxp.controller.Ingreso', {
 	    			console.log('Response',Response.countData);
 	    			var tpl = new Ext.XTemplate('<div><table width="100%">'+
 	    			      "<tr>"+
-						    "<td colspan='3' style='float: left;' width='100%'><hr></hr></td>"+
+						    "<td colspan='2' style='float: left;' width='100%'><hr></hr></td>"+
 						  "</tr>"+
 	    			      "<tr>"+
-						    "<td style='float: left;' width='33%'><b>Mant.</b></td>"+
-						    "<td style='float: left;' width='33%'><b>Const.</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>Viaje</b></td>"+ 
-						  "</tr>"+
-						  "<tr>"+
-						    "<td style='float: left;' width='33%'><b>{total_mantenimiento}</b></td>"+
-						    "<td style='float: left;' width='33%'><b>{total_construccion}</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>{total_viaje}</b></td>"+ 
-						  "</tr>"+
-						  "<tr>"+
-						   "<td style='float: left;' width='33%'><b>Espec.</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>Piedad</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>TOTAL</b></td>"+ 
-						  "</tr>"+
-						  "<tr>"+
-						    "<td style='float: left;' width='33%'><b>{total_especial}</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b>{total_piedad}</b></td>"+ 
-						    "<td style='float: left;' width='33%'><b><font color='green'>{total_dia}</font></b></td>"+ 
+						    "<td style='float: left;' width='50%'><b>Total Egresos: {total_monto} </b></td>"+
 						  "</tr>"+
 						  "</table></div>");
-						  
-						  
+						 
 	    			
-	    			me.getIngresolist().down('#resumenIngreso').setHtml(tpl.apply(Response.countData));
+	    			me.getEgresolist().down('#resumenEgreso').setHtml(tpl.apply(Response.countData));
 	    			
-	    			me.getIngresolist().down('list').unmask();
+	    			me.getEgresolist().down('list').unmask();
 	    		
 	},
     	
     onActiveFilter:function(searchField){
     	var me = this,
-    	    store = me.getIngresolist().down('list').getStore();
+    	    store = me.getEgresolist().down('list').getStore();
     	    
     	var extra = store.getProxy().getExtraParams();
     	
@@ -421,7 +462,7 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	console.log('........',extra, 'value.....',searchField.getValue())
     	store.getProxy().setExtraParams(Ext.apply(extra, {
-    		     "par_filtro": "mov.desc_obrero#mov.estado#mov.mes",
+    		     "par_filtro": "mov.desc_obrero#mov.estado#mov.mes#mov.desc_tipo_movimiento#mov.obs#mov.num_documento",
 			     "query": searchField.getValue()
 			}));
 			
@@ -435,7 +476,7 @@ Ext.define('pxp.controller.Ingreso', {
     
     onClearFilter:function(value){
     	var me = this,
-    	    store = me.getIngresolist().down('list').getStore();
+    	    store = me.getEgresolist().down('list').getStore();
     	    extra = store.getProxy().getExtraParams();
     	    
     	delete extra.par_filtro;
@@ -443,11 +484,11 @@ Ext.define('pxp.controller.Ingreso', {
     	
     	store.getProxy().setExtraParams(extra);
     	store.load({
-    		start:0,
-    		limit:20,
-    		page:1,
+    		start: 0,
+    		limit: 20,
+    		page: 1,
     		scope: me,
-    		callback: me.calcularResumenfunction});
+    		callback: me.calcularResumenfunction });
     }
     
 });

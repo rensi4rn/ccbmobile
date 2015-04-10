@@ -9,23 +9,20 @@
  * Loans based on the values selected (see the onFilter method in app/controllers/loans.js).
  *
  */
-Ext.define('pxp.view.ingreso.IngresoForm', {
+Ext.define('pxp.view.regionevento.RegionEventoForm', {
     extend: 'Ext.form.Panel',
-    xtype: 'ingresoform',
+    xtype: 'regioneventoform',
     requires: [
         'Ext.field.Select',
         'Ext.field.Search',
         'Ext.Toolbar',
         'Ext.plugin.ListPaging',
         'Ext.plugin.PullRefresh',
-        'pxp.view.component.Obrero'
+        'pxp.view.component.CasaOracion'
     ],
     
     config: {
     	ui: 'light',
-    	//scroll: true,
-    	//fullscreen: true,
-    	scrollable : false,
     	showAnimation: { type: "slide", direction: "down" } ,
         items: [
             {
@@ -60,45 +57,25 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
            {
            	xtype: 'fieldset',
            	flex: 1,
-           	scrollable : true,
            	layout: {
 	            type: 'vbox'
 	        },
             items:[  {
 				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento',
-				                name: 'id_movimiento'
+				                itemId:'id_region_evento',
+				                name:'id_region_evento'
 				     },
 				     {
 				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento_det_mantenimiento',
-				                name: 'id_movimiento_det_mantenimiento'
+				                itemId:'id_detalle_evento_hermano',
+				                name:'id_detalle_evento_hermano'
 				     },
 				     {
 				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento_det_piedad',
-				                name: 'id_movimiento_det_piedad'
+				                itemId:'id_detalle_evento_hermana',
+				                name:'id_detalle_evento_hermana'
 				    
 				    },
-				     {
-				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento_det_construccion',
-				                name: 'id_movimiento_det_construccion'
-				    
-				    },
-				     {
-				                xtype: 'hiddenfield',
-				                itemId: 'id_movimiento_det_viaje',
-				                name: 'id_movimiento_det_viaje'
-				    
-				    },
-				     {
-				                xtype:  'hiddenfield',
-				                itemId: 'id_movimiento_det_especial',
-				                name: 'id_movimiento_det_especial'
-				    
-				    },
-				    
 		            {
 			           	xtype: 'fieldset',
 			           	margin:'5 5 5 5',
@@ -110,18 +87,14 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 				        items:[
 					        {
 		                        xtype: 'datepickerfield',
-		                        itemId: 'fecha',
-		                        name:'fecha',
+		                        itemId: 'fecha_programada',
+		                        name:'fecha_programada',
 		                        labelWidth:100,
 		                        dateFormat: 'd/m/Y',
-		                        destroyPickerOnHide: true,
 		                        width:Ext.os.is.Phone?undefined:'150',
 		                        label: 'Fecha',
-		                        picker : {
-		                        	  yearFrom : new Date().getFullYear(),
-						     		  yearTo: new Date().getFullYear()
-						     	}
-		                        
+		                        //cls: 'my-component',
+                                value: new Date()
 		                    }
 		                 ]
 		             },
@@ -136,56 +109,59 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 				        items:[
 				             {
 				                xtype: 'hiddenfield',
-				                itemId:'id_obrero',
-				                name:'id_obrero'
+				                itemId:'id_casa_oracion',
+				                name:'id_casa_oracion'
 				             },
 				             {
 				                xtype: 'textfield',
 				                labelWidth:100,
-				                label: 'Obrero',
-				                name:'desc_obrero',
+				                label: 'Casa Oración',
+				                name:'nombre_co',
 				                flex: Ext.os.is.Phone?1:undefined,
 				                //flex: 1,
-				                itemId:'desc_obrero',
+				                itemId:'nombre_co',
 				                readOnly:true
 				                
 				             },
 				             {
 				                xtype: 'button',
-				                itemId:'obrerobutton',
+				                itemId:'casaoracionbutton',
 				                iconCls: 'ico-customers-small'
 				             }
 				         ]
 				     },
-				     
-				     {
+		            {
 			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
+			           	 margin:'5 5 5 5',
 			           	//flex: 1 ,
 		                layout: {
-				            type: Ext.os.is.Phone?'vbox':'hbox',
+				            type: 'hbox',
 				            align: 'stretch'
 				        },
 				        items:[
-					        {
-		                        xtype: 'selectfield',
-		                        name: 'concepto',
-		                        itemId:'estado',
-		                        label: 'Concepto',
-		                        valueField: 'codigo',
-		                        displayField: 'title',
-		                        store: {
-		                            data: [
-		                                { codigo: 'colecta_adultos', title: 'Colecta de Adultos'},
-		                                { codigo: 'colecta_jovenes', title: 'Colecta de Jovenes'},
-		                                { codigo: 'ingreso_trapaso', title: 'Ingreso por Trapaso'},
-		                                { codigo: 'colecta_especial', title: 'Colecta Especial'},
-		                                { codigo: 'saldo_inicial', title: 'Saldo Inicial'}
-		                            ]
-		                        }
-		                     }
-		                 ]
-		             },
+				             {
+				                xtype: 'hiddenfield',
+				                itemId:'id_evento',
+				                name: 'id_evento'
+				             },
+				             {
+				                xtype: 'textfield',
+				                labelWidth: 100,
+				                label: 'Evento',
+				                flex: Ext.os.is.Phone?1:undefined,
+				                //flex: 1,
+				                itemId: 'nombre',
+				                name: 'nombre',
+				                readOnly:true
+				                
+				             },
+				             {
+				                xtype: 'button',
+				                itemId:'eventobutton',
+				                iconCls: 'ico-customers-small'
+				             }
+				         ]
+				     },
 				     
 				     {
 			           	xtype: 'fieldset',
@@ -206,7 +182,8 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 		                        store: {
 		                            data: [
 		                                { codigo: 'pendiente', title: 'Pendiente'},
-		                                { codigo: 'entregado', title: 'Entregado'}
+		                                { codigo: 'ejecutado', title: 'Ejecutado'},
+		                                { codigo: 'cancelado', title: 'Cancelado'}
 		                            ]
 		                        }
 		                     }
@@ -223,11 +200,12 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 				        },
 				        items:[
 					           {
-			                        xtype: 'numberfield',
-			                        name: 'monto_mantenimiento',
-			                        itemId:'monto_mantenimiento',
+			                        xtype: 'spinnerfield',
+			                        name: 'cantidad_hermano',
+			                        itemId:'cantidad_hermano',
+			                        stepValue: 1,
 			                        minValue : 0,
-			                        label: 'Mantenimineto'
+			                        label: 'Hermanos'
 			                    }
 		                 ]
 		             },
@@ -242,72 +220,12 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 				        },
 				        items:[
 					        {
-			                        xtype: 'numberfield',
-			                        name: 'monto_piedad',
-			                        itemId:'monto_piedad',
+			                        xtype: 'spinnerfield',
+			                        name: 'cantidad_hermana',
+			                        itemId:'cantidad_hermana',
 			                        stepValue: 1,
 			                        minValue : 0,
-			                        label: 'Piedad'
-			                    }
-		                 ]
-		             },
-				     
-				     {
-			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: Ext.os.is.Phone?'vbox':'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-					        {
-			                        xtype: 'numberfield',
-			                        name: 'monto_construccion',
-			                        itemId:'monto_construccion',
-			                        stepValue: 1,
-			                        minValue : 0,
-			                        label: 'Construcción'
-			                    }
-		                 ]
-		             },
-				     
-				     {
-			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: Ext.os.is.Phone?'vbox':'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-					        {
-			                        xtype: 'numberfield',
-			                        name: 'monto_viaje',
-			                        itemId:'monto_viaje',
-			                        stepValue: 1,
-			                        minValue : 0,
-			                        label: 'Viaje'
-			                    }
-		                 ]
-		             },
-				     
-				     {
-			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: Ext.os.is.Phone?'vbox':'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-					        {
-			                        xtype: 'numberfield',
-			                        name: 'monto_especial',
-			                        itemId:'monto_especial',
-			                        stepValue: 1,
-			                        minValue : 0,
-			                        label: 'Especial'
+			                        label: 'Hermanas'
 			                    }
 		                 ]
 		             }
