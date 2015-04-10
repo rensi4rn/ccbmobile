@@ -87,25 +87,32 @@ Ext.define('pxp.controller.RegionEvento', {
     	    cantidad_hermano = me.getRegioneventoform().down('#cantidad_hermano'),
     	    cantidad_hermana = me.getRegioneventoform().down('#cantidad_hermana'),
     	    estado = me.getRegioneventoform().down('#estado'),
+    	    hora = me.getRegioneventoform().down('#hora'),
     	    params =  me.getRegioneventoform().getValues();
+    	 
+    	
+    	if(!hora.getValue()){
+         	alert('Necesitamos que indique la hora del evento', Ext.emptyFn);
+            return;
+        } 
              
              
         if(!id_evento.getValue()){
-         	Ext.Msg.alert('Info...', 'Necesitamos que indique el evento', Ext.emptyFn);
+         	alert('Necesitamos que indique el evento', Ext.emptyFn);
             return;
         } 
         
         if(!id_casa_oracion.getValue()){
-         	Ext.Msg.alert('Info...', 'Necesitamos que indique la casa de oración', Ext.emptyFn);
+         	alert('Necesitamos que indique la casa de oración', Ext.emptyFn);
             return;
         } 
         
         if(!id_casa_oracion.getValue()){
-         	Ext.Msg.alert('Info...', 'Necesitamos que indique el estado', Ext.emptyFn);
+         	alert('Necesitamos que indique el estado', Ext.emptyFn);
             return;
         }   
-             
-            
+        console.log('hora.....', hora)     
+        params = Ext.apply(params, {hora: hora.getValue().getHours()+':'+hora.getValue().getMinutes()+':00'});   
         pxp.app.showMask();      
     	Ext.Ajax.request({
 		        withCredentials: true,

@@ -14,6 +14,9 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
     xtype: 'regioneventoform',
     requires: [
         'Ext.field.Select',
+        'Ext.ux.picker.DateTime',
+        'Ext.ux.field.DateTimePicker',
+        'Ext.field.Select',
         'Ext.field.Search',
         'Ext.Toolbar',
         'Ext.plugin.ListPaging',
@@ -103,6 +106,31 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
 			           	margin:'5 5 5 5',
 			           	//flex: 1 ,
 		                layout: {
+				            type: Ext.os.is.Phone?'vbox':'hbox',
+				            align: 'stretch'
+				        },
+				        items:[
+					        {
+			                    xtype: 'datetimepickerfield',
+			                    name : 'hora',
+			                    itemId : 'hora',
+			                    label: 'Hora',
+			                    value: new Date(),			                    
+			                    dateTimeFormat : 'H:i:s',
+			                    destroyPickerOnHide: false,
+			                    picker: {
+		                        yearFrom: 1980,
+		                        minuteInterval : 30,
+		                        slotOrder: ['hour','minute']
+		                    }
+		             }
+		                 ]
+		             },
+		            {
+			           	xtype: 'fieldset',
+			           	margin:'5 5 5 5',
+			           	//flex: 1 ,
+		                layout: {
 				            type: 'hbox',
 				            align: 'stretch'
 				        },
@@ -130,7 +158,8 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
 				             }
 				         ]
 				     },
-		            {
+				     
+				    {
 			           	xtype: 'fieldset',
 			           	 margin:'5 5 5 5',
 			           	//flex: 1 ,
