@@ -25,9 +25,7 @@ Ext.define('pxp.controller.Agenda', {
         },
 
         control: {
-            'agendalist list': {
-                itemdoubletap: 'onFormEdit'
-            },
+            
             'agendatbar #addingreso': {
                 tap: 'onAdd'
             },

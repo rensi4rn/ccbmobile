@@ -3,7 +3,7 @@ session_start();
 session_set_cookie_params (0,'/', '' ,true ,true);
 ?>
 <!DOCTYPE HTML>
-<html lang="es">
+<html  lang="es">
 <head>
     <meta charset="UTF-8">
     <title>CCB</title>
