@@ -176,7 +176,7 @@ Ext.define('pxp.view.egreso.EgresoForm', {
 					        {
 		                        xtype: 'selectfield',
 		                        name: 'concepto',
-		                        itemId:'estado',
+		                        itemId:'concepto',
 		                        label: 'Concepto',
 		                        valueField: 'codigo',
 		                        displayField: 'title',
@@ -279,7 +279,7 @@ Ext.define('pxp.view.egreso.EgresoForm', {
 			                        name: 'num_documento',
 			                        itemId:'num_documento',
 			                        minValue : 0,
-			                        label: 'Número'
+			                        label: 'Núm Doc'
 			                    }
 		                 ]
 		             },
@@ -300,13 +300,71 @@ Ext.define('pxp.view.egreso.EgresoForm', {
 			                        label: 'Obs'
 			                    }
 		                 ]
-		             }
-		             
-		             
-				     
-                     
-                 ]
-           	
+		             },
+		            {
+			           	xtype: 'fieldset',
+			           	margin:'5 5 5 5',
+			           	//flex: 1 ,
+		                layout: {
+				            type: 'hbox',
+				            align: 'stretch'
+				        },
+				        items:[
+				             {
+				                xtype: 'hiddenfield',
+				                itemId:'id_ot',
+				                name:'id_ot'
+				             },
+				             {
+				                xtype: 'textfield',
+				                labelWidth:100,
+				                label: 'Objetivo',
+				                name:'desc_orden',
+				                flex: Ext.os.is.Phone?1:undefined,
+				                //flex: 1,
+				                itemId:'desc_orden',
+				                readOnly:true
+				                
+				             },
+				             {
+				                xtype: 'button',
+				                itemId:'otbutton',
+				                iconCls: 'ico-customers-small'
+				             }
+				         ]
+				     },
+			         {
+				           	xtype: 'fieldset',
+				           	margin:'5 5 5 5',
+				           	//flex: 1 ,
+			                layout: {
+					            type: 'hbox',
+					            align: 'stretch'
+					        },
+					        items:[
+					             {
+					                xtype: 'hiddenfield',
+					                itemId:'id_concepto_ingas',
+					                name:'id_concepto_ingas'
+					             },
+					             {
+					                xtype: 'textfield',
+					                labelWidth:100,
+					                label: 'Concepto de Gasto',
+					                name:'desc_ingas',
+					                flex: Ext.os.is.Phone?1:undefined,
+					                itemId:'desc_ingas',
+					                readOnly:true
+					                
+					             },
+					             {
+					                xtype: 'button',
+					                itemId: 'conceptoingasbutton',
+					                iconCls: 'ico-customers-small'
+					             }
+					         ]
+					     }
+		         ]
            }
         ],
         layout: {

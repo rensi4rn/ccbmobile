@@ -35,6 +35,9 @@ Ext.define('pxp.controller.Saldos', {
             'saldosformfilter #obrerobutton':{
             	tap:'onTapListObrero'
             },
+            'saldosformfilter #otbutton':{
+            	tap:'onTapListOt'
+            },
             'saldosformfilter #aplicar': {
             	tap:'onInitFilter'
             },
@@ -182,6 +185,31 @@ Ext.define('pxp.controller.Saldos', {
     		page:1
     		});
     	me.casaoracioncmp.show();
+    	
+    },
+     onTapListOt: function(){
+    	var me = this;
+    	
+    	if(!me.ordentrabajocomp){
+    		
+    		var cmphidden = me.getSaldosformfilter().down('#id_ot'),
+    		    cmpText = me.getSaldosformfilter().down('#desc_orden');
+    		
+    	    me.ordentrabajocomp = Ext.create('pxp.view.component.OrdenTrabajo',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText
+    	   });
+    	   
+    	   Ext.Viewport.add(me.ordentrabajocomp);
+    	}
+    	
+    	var  store = me.ordentrabajocomp.down('list').getStore();
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	me.ordentrabajocomp.show();
     	
     },
     

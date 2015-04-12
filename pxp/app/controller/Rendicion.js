@@ -54,6 +54,13 @@ Ext.define('pxp.controller.Rendicion', {
             'rendicionform #tipomovimientobutton':{
             	tap:'onTapListTipoMovimiento'
             },
+            'rendicionform #otbutton':{
+            	tap:'onTapListOt'
+            },
+            
+            'rendicionform #conceptoingasbutton':{
+            	tap:'onTapListConceptoIngas'
+            },
             
             'rendicionform #eventobutton':{
             	tap:'onTapListEvento'
@@ -128,14 +135,13 @@ Ext.define('pxp.controller.Rendicion', {
     	    obs = me.getRendicionform().down('#obs'),
     	    num_documento = me.getRendicionform().down('#num_documento'),
     	    estado = me.getRendicionform().down('#estado'),
-    	    
+    	    concepto = me.getRendicionform().down('#concepto'),
+    	    id_concepto_ingas = me.getRendicionform().down('#id_concepto_ingas'),
+    	    desc_ingas  = me.getRendicionform().down('#desc_ingas'),
     	    id_obrero = me.getRendicionform().down('#id_obrero'),
     	    id_tipo_movimiento = me.getRendicionform().down('#id_tipo_movimiento'),
     	    id_casa_oracion = me.getRendicionformfilter().down('#id_casa_oracion').getValue(),
-            id_gestion = me.getRendicionformfilter().down('#id_gestion').getValue(),
-            params =  me.getRendicionform().getValues();
-            
-        params  = Ext.apply(params,{ tipo: 'egreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
+            id_gestion = me.getRendicionformfilter().down('#id_gestion').getValue();
        
         
         if(!fecha.getValue()){
@@ -168,6 +174,21 @@ Ext.define('pxp.controller.Rendicion', {
          	alert( 'Es necesario indicar que se compro (Obs)', Ext.emptyFn);
             return;
         } 
+        if(concepto.getValue() == 'rendicion'){
+        	if(!id_concepto_ingas.getValue()){
+         	  alert('Necesitamos que indique el concepto de gasto', Ext.emptyFn);
+              return;
+            }
+        }
+        else{
+        	id_concepto_ingas.reset();
+        	desc_ingas.reset();
+        }
+               
+        
+        var params =  me.getRendicionform().getValues();
+        params  = Ext.apply(params,{ tipo: 'egreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
+        
         
         
           
@@ -336,7 +357,56 @@ Ext.define('pxp.controller.Rendicion', {
     	me.tipomovimientocmp.show();
     	
    },
-    
+   onTapListOt: function(){
+    	var me = this;
+    	
+    	if(!me.ordentrabajocomp){
+    		
+    		var cmphidden = me.getRendicionformfilter().down('#id_ot'),
+    		    cmpText = me.getRendicionformfilter().down('#desc_orden');
+    		
+    	    me.ordentrabajocomp = Ext.create('pxp.view.component.OrdenTrabajo',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText
+    	   });
+    	   
+    	   Ext.Viewport.add(me.ordentrabajocomp);
+    	}
+    	
+    	var  store = me.ordentrabajocomp.down('list').getStore();
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	me.ordentrabajocomp.show();
+    	
+    },
+    onTapListConceptoIngas: function(){
+    	var me = this;
+    	
+    	if(!me.conceptoingascomp){
+    		
+    		var cmphidden = me.getRendicionform().down('#id_concepto_ingas'),
+    		    cmpText = me.getRendicionform().down('#desc_ingas');
+    		
+    	    me.conceptoingascomp = Ext.create('pxp.view.component.ConceptoIngas',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText
+    	   });
+    	   
+    	   Ext.Viewport.add(me.conceptoingascomp);
+    	}
+    	
+    	var  store = me.conceptoingascomp.down('list').getStore();
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	me.conceptoingascomp.show();
+    	
+    }, 
    onTapListCasaOracion:function(){
     	var me = this;
     	

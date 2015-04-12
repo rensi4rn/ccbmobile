@@ -18,7 +18,8 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
         'Ext.Toolbar',
         'Ext.plugin.ListPaging',
         'Ext.plugin.PullRefresh',
-        'pxp.view.component.Obrero'
+        'pxp.view.component.Obrero',
+        'pxp.view.component.OrdenTrabajo'
     ],
     
     config: {
@@ -310,7 +311,70 @@ Ext.define('pxp.view.ingreso.IngresoForm', {
 			                        label: 'Especial'
 			                    }
 		                 ]
-		             }
+		             },
+		            {
+			           	xtype: 'fieldset',
+			           	margin:'5 5 5 5',
+			           	//flex: 1 ,
+		                layout: {
+				            type: 'hbox',
+				            align: 'stretch'
+				        },
+				        items:[
+				             {
+				                xtype: 'hiddenfield',
+				                itemId:'id_ot',
+				                name:'id_ot'
+				             },
+				             {
+				                xtype: 'textfield',
+				                labelWidth:100,
+				                label: 'Objetivo',
+				                name:'desc_orden',
+				                flex: Ext.os.is.Phone?1:undefined,
+				                //flex: 1,
+				                itemId:'desc_orden',
+				                readOnly:true
+				                
+				             },
+				             {
+				                xtype: 'button',
+				                itemId:'otbutton',
+				                iconCls: 'ico-customers-small'
+				             }
+				         ]
+				     },
+			         {
+				           	xtype: 'fieldset',
+				           	margin:'5 5 5 5',
+				           	//flex: 1 ,
+			                layout: {
+					            type: 'hbox',
+					            align: 'stretch'
+					        },
+					        items:[
+					             {
+					                xtype: 'hiddenfield',
+					                itemId:'id_tipo_movimiento_ot',
+					                name:'id_tipo_movimiento_ot'
+					             },
+					             {
+					                xtype: 'textfield',
+					                labelWidth:100,
+					                label: 'Colecta Obj',
+					                name:'nombre_tipo_mov_ot',
+					                flex: Ext.os.is.Phone?1:undefined,
+					                itemId:'nombre_tipo_mov_ot',
+					                readOnly:true
+					                
+					             },
+					             {
+					                xtype: 'button',
+					                itemId: 'tipomovimientobutton',
+					                iconCls: 'ico-customers-small'
+					             }
+					         ]
+					     }
                      
                  ]
            	

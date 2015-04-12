@@ -82,7 +82,10 @@ Ext.define('pxp.view.ingreso.IngresoList', {
 						  "<tr>"+
 						    "<td colspan=5 style='float: left;' width='100%'>Reponsable: {desc_obrero}</td>"+						   
 						  "</tr>"+
-						  
+						  "<tr>"+
+						    "<td colspan=5 style='float: left;' width='100%'>Objetivo: {nombre_tipo_mov_ot} - {desc_orden}</td>"+						   
+						  "</tr>"+
+
 						  "<tr>"+
 						    "<td colspan=5 style='float: left;' width='100%'><p align='right'><font size='1'>(actualizado por: {usr_mod})</font></p></td>"+						   
 						  "</tr>"+

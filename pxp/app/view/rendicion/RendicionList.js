@@ -65,8 +65,7 @@ Ext.define('pxp.view.rendicion.RendicionList', {
 						  "</tr>"+
 						  "<tr>"+
 						    "<td colspan=2 style='float: left;' width='100%'>Coletas de:  {desc_tipo_movimiento}</td>"+						   
-						  "</tr>"+
-						 
+						  "</tr>"+						 
 						  "<tr>"+
 						    "<td colspan=2 style='float: left;' width='100%'>Total:  {monto}</td>"+						   
 						  "</tr>"+
@@ -74,14 +73,15 @@ Ext.define('pxp.view.rendicion.RendicionList', {
 						    "<td colspan=1 style='float: left;' width='50%'>Doc:  {tipo_documento}</td>"+
 						    "<td colspan=1 style='float: left;' width='50%'>Num:  {num_documento}</td>"+							   
 						  "</tr>"+
-						   "<tr>"+
-						    "<td colspan=2 style='float: left;' width='100%'>{obs}</td>"+							   
-						  "</tr>"+
-						  
+						  "<tr>"+
+						    "<td colspan=2 style='float: left;' width='100%'>{desc_ingas} - {obs}</td>"+							   
+						  "</tr>"+						  
 						  "<tr>"+
 						    "<td colspan=2 style='float: left;' width='100%'>Reponsable:  {desc_obrero}</td>"+						   
-						  "</tr>"+
-						  
+						  "</tr>"+						  
+						   "<tr>"+
+						    "<td colspan=2 style='float: left;' width='100%'>OBjetivo:  {desc_orden}</td>"+						   
+						  "</tr>"+						  
 						  "<tr>"+
 						    "<td colspan=2 style='float: left;' width='100%'><p align='right'><font size='1'>(actualizado por: {usr_mod})</font></p></td>"+						   
 						  "</tr>"+

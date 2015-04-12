@@ -51,6 +51,15 @@ Ext.define('pxp.controller.Ingreso', {
             	tap:'onTapListObrero'
             },
             
+            'ingresoform #otbutton':{
+            	tap:'onTapListOt'
+            },
+            
+            'ingresoform #tipomovimientobutton':{
+            	tap:'onTapListTipoMovimiento'
+            },
+            
+            
             'ingresoform #eventobutton':{
             	tap:'onTapListEvento'
             },
@@ -123,11 +132,21 @@ Ext.define('pxp.controller.Ingreso', {
     	    estado = me.getIngresoform().down('#estado'),
     	    params =  me.getIngresoform().getValues(),
     	    id_obrero = me.getIngresoform().down('#id_obrero'),
+    	    id_ot = me.getIngresoform().down('#id_ot'),
+    	    id_tipo_movimiento_ot = me.getIngresoform().down('#id_tipo_movimiento_ot'),
     	    id_casa_oracion = me.getIngresoformfilter().down('#id_casa_oracion').getValue(),
             id_gestion = me.getIngresoformfilter().down('#id_gestion').getValue();
         
         params  = Ext.apply(params,{obs:'', tipo: 'ingreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
        
+        if(id_ot.getValue()){
+         	
+            if(!id_tipo_movimiento_ot.getValue()){
+         	   alert('Si tiene un objetivo tiene que indicar para que colecta', Ext.emptyFn);
+               return;
+            
+            } 
+        } 
         
         if(!fecha.getValue()){
          	alert('Necesitamos que indique la fecha', Ext.emptyFn);
@@ -275,6 +294,60 @@ Ext.define('pxp.controller.Ingreso', {
     		page:1
     		});
     	me.obrerocmp.show();
+    	
+    },
+      onTapListTipoMovimiento: function(){
+    	var me = this;
+    	if(!me.tipomovimientocmp){
+    		var cmphidden = me.getIngresoform().down('#id_tipo_movimiento_ot'),
+    		    cmpText = me.getIngresoform().down('#nombre_tipo_mov_ot');
+    		
+    		me.tipomovimientocmp = Ext.create('pxp.view.component.TipoMovimiento',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText,
+	    	   	'displayColumn':'nombre',
+	    	   	'idColumn':'id_tipo_movimiento'
+    	   });
+    	   
+    	   Ext.Viewport.add(me.tipomovimientocmp);
+    	}
+    	
+    	var  store = me.tipomovimientocmp.down('list').getStore();
+    	
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	
+    	me.tipomovimientocmp.show();
+    	
+   },
+    onTapListOt: function(){
+    	var me = this;
+    	
+    	if(!me.ordentrabajocomp){
+    		
+    		var cmphidden = me.getIngresoform().down('#id_ot'),
+    		    cmpText = me.getIngresoform().down('#desc_orden');
+    		
+    	    me.ordentrabajocomp = Ext.create('pxp.view.component.OrdenTrabajo',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText,
+	    	   	'displayColumn':'desc_orden',
+	    	   	'idColumn':'id_orden_trabajo'
+    	   });
+    	   
+    	   Ext.Viewport.add(me.ordentrabajocomp);
+    	}
+    	
+    	var  store = me.ordentrabajocomp.down('list').getStore();
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	me.ordentrabajocomp.show();
     	
     },
     

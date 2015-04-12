@@ -26,7 +26,8 @@ Ext.define('pxp.model.Egreso', {
 			        'total_monto','tipo_reg','tipo_documento','num_documento',
 			        'id_obrero',
 				    'desc_obrero',
-				    'estado','desc_tipo_movimiento','desc_casa_oracion'
+				    'estado','desc_tipo_movimiento','desc_casa_oracion','id_ot',
+				    'desc_orden','id_concepto_ingas','desc_ingas'
 				   ]
      }  
 });

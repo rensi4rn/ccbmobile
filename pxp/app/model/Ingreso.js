@@ -43,6 +43,6 @@ Ext.define('pxp.model.Ingreso', {
 	                    'mes',
 	                    'estado_periodo',
 	                    'id_gestion',
-	                    'gestion']
+	                    'gestion','id_ot','desc_orden','nombre_tipo_mov_ot','id_tipo_movimiento_ot']
      }  
 });

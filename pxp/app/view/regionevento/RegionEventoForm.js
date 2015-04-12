@@ -26,6 +26,7 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
     
     config: {
     	ui: 'light',
+    	scrollable : false,
     	showAnimation: { type: "slide", direction: "down" } ,
         items: [
             {
@@ -60,6 +61,7 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
            {
            	xtype: 'fieldset',
            	flex: 1,
+           	scrollable : true,
            	layout: {
 	            type: 'vbox'
 	        },

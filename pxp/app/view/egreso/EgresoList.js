@@ -37,9 +37,7 @@ Ext.define('pxp.view.egreso.EgresoList', {
     	var me = this;
     	me.store = Ext.create('pxp.store.Egreso');
     	
-    	
-	   
-	   me.add([
+     me.add([
 	   	    {
 		   	    xtype: 'list',
 		   	    flex: 1,
@@ -73,15 +71,16 @@ Ext.define('pxp.view.egreso.EgresoList', {
 						  "<tr>"+
 						    "<td colspan=1 style='float: left;' width='50%'>Doc:  {tipo_documento}</td>"+
 						    "<td colspan=1 style='float: left;' width='50%'>Num:  {num_documento}</td>"+							   
-						  "</tr>"+
-						   "<tr>"+
-						    "<td colspan=2 style='float: left;' width='100%'>{obs}</td>"+							   
-						  "</tr>"+
-						  
+						  "</tr>"+						  
+						  "<tr>"+
+						    "<td colspan=2 style='float: left;' width='100%'>{desc_ingas} - {obs}</td>"+							   
+						  "</tr>"+						  
 						  "<tr>"+
 						    "<td colspan=2 style='float: left;' width='100%'>Reponsable:  {desc_obrero}</td>"+						   
 						  "</tr>"+
-						  
+						  "<tr>"+
+						    "<td colspan=2 style='float: left;' width='100%'>OBjetivo:  {desc_orden}</td>"+						   
+						  "</tr>"+
 						  "<tr>"+
 						    "<td colspan=2 style='float: left;' width='100%'><p align='right'><font size='1'>(actualizado por: {usr_mod})</font></p></td>"+						   
 						  "</tr>"+
