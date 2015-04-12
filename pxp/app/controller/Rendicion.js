@@ -5,7 +5,7 @@
  * The only controller in this simple application - this simply sets up the fullscreen viewport panel
  * and renders a detailed overlay whenever a Loan is tapped on.
  */
-Ext.define('pxp.controller.Egreso', {
+Ext.define('pxp.controller.Rendicion', {
     extend: 'Ext.app.Controller',
     config: {
         profile: Ext.os.deviceType.toLowerCase(),
@@ -18,58 +18,58 @@ Ext.define('pxp.controller.Egreso', {
         ],
 
         refs: {
-            egresolist: 'egresolist',
-            egresotbar: 'egresotbar',
-            egresoform: 'egresoform',
-            egresoformfilter: 'egresoformfilter'
+            rendicionlist: 'rendicionlist',
+            rendiciontbar: 'rendiciontbar',
+            rendicionform: 'rendicionform',
+            rendicionformfilter: 'rendicionformfilter'
         },
 
         control: {
-            'egresolist list': {
+            'rendicionlist list': {
                 itemdoubletap: 'onFormEdit'
             },
-            'egresotbar #addegreso': {
+            'rendiciontbar #addrendicion': {
                 tap: 'onAdd'
             },
-            'egresotbar #deleteegreso': {
+            'rendiciontbar #deleterendicion': {
                 tap: 'onDelete'
             },
             
-            'egresoform #back':{
+            'rendicionform #back':{
             	tap:'onBackList'
             },
             
-            'egresotbar #backfilter':{
+            'rendiciontbar #backfilter':{
             	tap:'onBackFilter'
             },            
-            'egresotbar #searchfComponent':{
+            'rendiciontbar #searchfComponent':{
             	action: 'onActiveFilter',
             	clearicontap: 'onClearFilter'
             },
             
-            'egresoform #obrerobutton':{
+            'rendicionform #obrerobutton':{
             	tap:'onTapListObrero'
             },
             
-            'egresoform #tipomovimientobutton':{
+            'rendicionform #tipomovimientobutton':{
             	tap:'onTapListTipoMovimiento'
             },
             
-            'egresoform #eventobutton':{
+            'rendicionform #eventobutton':{
             	tap:'onTapListEvento'
             },
             
-            'egresoform #save':{
+            'rendicionform #save':{
             	tap:'onSave'
             },
             
-            'egresoformfilter #casaoracionbutton':{
+            'rendicionformfilter #casaoracionbutton':{
             	tap:'onTapListCasaOracion'
             },
-            'egresoformfilter #gestionbutton':{
+            'rendicionformfilter #gestionbutton':{
             	tap:'onTapListGestion'
             },
-            'egresoformfilter #aplicar':{
+            'rendicionformfilter #aplicar':{
             	tap:'onInitFilter'
             }
             
@@ -83,12 +83,12 @@ Ext.define('pxp.controller.Egreso', {
     
    onAdd:function(){
    	
-   	    this.getEgresolist().hide();
-     	this.getEgresoform().show();
-     	this.getEgresoform().down('title').setTitle('Nuevo Egreso');
-     	this.getEgresoform().reset();
-     	var ges = parseInt(this.getEgresoformfilter().down('#gestion').getValue())//,
-     	    picker = this.getEgresoform().down('#fecha').getPicker();
+   	    this.getRendicionlist().hide();
+     	this.getRendicionform().show();
+     	this.getRendicionform().down('title').setTitle('Nueva Rendicion');
+     	this.getRendicionform().reset();
+     	var ges = parseInt(this.getRendicionformfilter().down('#gestion').getValue())//,
+     	    picker = this.getRendicionform().down('#fecha').getPicker();
      	
      	if(picker){
      		picker.setYearFrom(ges*1);
@@ -100,8 +100,8 @@ Ext.define('pxp.controller.Egreso', {
    },
    onBackList:function(){
    	    
-   	    this.getEgresoform().hide();
-    	this.getEgresolist().show();
+   	    this.getRendicionform().hide();
+    	this.getRendicionlist().show();
      	
    },
    
@@ -111,11 +111,11 @@ Ext.define('pxp.controller.Egreso', {
    
    
    onFormEdit: function(list, index, target, record, e, eOpts){
-   	    this.getEgresoform().show();
-    	this.getEgresolist().hide();
-    	this.getEgresoform().reset(); 
-    	this.getEgresoform().setRecord(record);
-    	this.getEgresoform().down('title').setTitle('Editar Egreso');
+   	    this.getRendicionform().show();
+    	this.getRendicionlist().hide();
+    	this.getRendicionform().reset(); 
+    	this.getRendicionform().setRecord(record);
+    	this.getRendicionform().down('title').setTitle('Editar Rendicion');
     	
     	
    },
@@ -123,17 +123,17 @@ Ext.define('pxp.controller.Egreso', {
    onSave:function(){
     	
     	var me = this,
-    	    fecha = me.getEgresoform().down('#fecha'),
-    	    monto = me.getEgresoform().down('#monto'),
-    	    obs = me.getEgresoform().down('#obs'),
-    	    num_documento = me.getEgresoform().down('#num_documento'),
-    	    estado = me.getEgresoform().down('#estado'),
+    	    fecha = me.getRendicionform().down('#fecha'),
+    	    monto = me.getRendicionform().down('#monto'),
+    	    obs = me.getRendicionform().down('#obs'),
+    	    num_documento = me.getRendicionform().down('#num_documento'),
+    	    estado = me.getRendicionform().down('#estado'),
     	    
-    	    id_obrero = me.getEgresoform().down('#id_obrero'),
-    	    id_tipo_movimiento = me.getEgresoform().down('#id_tipo_movimiento'),
-    	    id_casa_oracion = me.getEgresoformfilter().down('#id_casa_oracion').getValue(),
-            id_gestion = me.getEgresoformfilter().down('#id_gestion').getValue(),
-            params =  me.getEgresoform().getValues();
+    	    id_obrero = me.getRendicionform().down('#id_obrero'),
+    	    id_tipo_movimiento = me.getRendicionform().down('#id_tipo_movimiento'),
+    	    id_casa_oracion = me.getRendicionformfilter().down('#id_casa_oracion').getValue(),
+            id_gestion = me.getRendicionformfilter().down('#id_gestion').getValue(),
+            params =  me.getRendicionform().getValues();
             
         params  = Ext.apply(params,{ tipo: 'egreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
        
@@ -188,7 +188,7 @@ Ext.define('pxp.controller.Egreso', {
 		           else{
 			           //mostrar y actualizar el panel de listado
 			           me.onBackList(); 
-			           me.getEgresolist().down('list').getStore().load({start:0,limit:20,page:1});
+			           me.getRendicionlist().down('list').getStore().load({start:0,limit:20,page:1});
 		           }
 		           
 		        },
@@ -203,7 +203,7 @@ Ext.define('pxp.controller.Egreso', {
    onDelete:function(){
     	
     	
-    	var seltected = this.getEgresolist().down('list').getSelection();
+    	var seltected = this.getRendicionlist().down('list').getSelection();
     	
     	if(seltected.length == 0){
     	    Ext.Msg.alert('Info ...','Selecione una fila primero');
@@ -237,7 +237,7 @@ Ext.define('pxp.controller.Egreso', {
 		           else{
 			           //mostrar y actualizar el panel de listado
 			           me.onBackList(); 
-			           me.getEgresolist().down('list').getStore().load({start:0,limit:20,page:1});
+			           me.getRendicionlist().down('list').getStore().load({start:0,limit:20,page:1});
 		           }
 		          
 		         
@@ -257,8 +257,8 @@ Ext.define('pxp.controller.Egreso', {
     	
     	if(!me.eventocmp){
     		
-    		var cmphidden = me.getEgresoform().down('#id_evento'),
-    		    cmpText =me.getEgresoform().down('#nombre');
+    		var cmphidden = me.getRendicionform().down('#id_evento'),
+    		    cmpText =me.getRendicionform().down('#nombre');
     		
     	    me.eventocmp = Ext.create('pxp.view.component.Evento',{
 	    	   	'cmpHidden': cmphidden,
@@ -286,8 +286,8 @@ Ext.define('pxp.controller.Egreso', {
     	
     	if(!me.obrerocmp){
     		
-    		var cmphidden = me.getEgresoform().down('#id_obrero'),
-    		    cmpText = me.getEgresoform().down('#desc_obrero');
+    		var cmphidden = me.getRendicionform().down('#id_obrero'),
+    		    cmpText = me.getRendicionform().down('#desc_obrero');
     		
     	    me.obrerocmp = Ext.create('pxp.view.component.Obrero',{
 	    	   	'cmpHidden':cmphidden,
@@ -312,8 +312,8 @@ Ext.define('pxp.controller.Egreso', {
     onTapListTipoMovimiento: function(){
     	var me = this;
     	if(!me.tipomovimientocmp){
-    		var cmphidden = me.getEgresoform().down('#id_tipo_movimiento'),
-    		    cmpText = me.getEgresoform().down('#desc_tipo_movimiento');
+    		var cmphidden = me.getRendicionform().down('#id_tipo_movimiento'),
+    		    cmpText = me.getRendicionform().down('#desc_tipo_movimiento');
     		
     		me.tipomovimientocmp = Ext.create('pxp.view.component.TipoMovimiento',{
 	    	   	'cmpHidden':cmphidden,
@@ -342,8 +342,8 @@ Ext.define('pxp.controller.Egreso', {
     	
     	if(!me.casaoracioncmp){
     		
-    		var cmphidden = me.getEgresoformfilter().down('#id_casa_oracion'),
-    		    cmpText = me.getEgresoformfilter().down('#nombre_co');
+    		var cmphidden = me.getRendicionformfilter().down('#id_casa_oracion'),
+    		    cmpText = me.getRendicionformfilter().down('#nombre_co');
     		
     	    me.casaoracioncmp = Ext.create('pxp.view.component.CasaOracion',{
 	    	   	'cmpHidden': cmphidden,
@@ -370,8 +370,8 @@ Ext.define('pxp.controller.Egreso', {
     	
     	if(!me.gestioncmp){
     		console.log('1')
-    		var cmphidden = me.getEgresoformfilter().down('#id_gestion'),
-    		    cmpText = me.getEgresoformfilter().down('#gestion');
+    		var cmphidden = me.getRendicionformfilter().down('#id_gestion'),
+    		    cmpText = me.getRendicionformfilter().down('#gestion');
     		me.gestioncmp = Ext.create('pxp.view.component.Gestion',{
 	    	   	'cmpHidden':cmphidden,
 	    	   	'cmpText':cmpText,
@@ -395,23 +395,23 @@ Ext.define('pxp.controller.Egreso', {
     
     onBackFilter:function(){
    	    
-   	    this.getEgresolist().hide();
-    	this.getEgresoformfilter().show();
+   	    this.getRendicionlist().hide();
+    	this.getRendicionformfilter().show();
      	
     },
     
     onInitFilter:function(){
     	var me = this,
-    	    store = me.getEgresolist().down('list').getStore(),
-    	    formfilter = this.getEgresoformfilter(),
+    	    store = me.getRendicionlist().down('list').getStore(),
+    	    formfilter = this.getRendicionformfilter(),
     	    id_casa_oracion = formfilter.down('#id_casa_oracion').getValue(),
     	    id_gestion = formfilter.down('#id_gestion').getValue();
     	
     	if(id_casa_oracion && id_gestion){
     		
-    		me.getEgresolist().show();
-		    me.getEgresolist().down('list').mask(); 
-		    me.getEgresoformfilter().hide();
+    		me.getRendicionlist().show();
+		    me.getRendicionlist().down('list').mask(); 
+		    me.getRendicionformfilter().hide();
 	    
 	    	store.getProxy().setExtraParams({
 	    		     'id_casa_oracion': id_casa_oracion,
@@ -434,7 +434,7 @@ Ext.define('pxp.controller.Egreso', {
     calcularResumenfunction: function(records, operation, success){
 	    		    var me = this,
 	    		        Response = Ext.JSON.decode(operation._response.responseText);
-	    			
+	    			console.log('Response',Response.countData);
 	    			var tpl = new Ext.XTemplate('<div><table width="100%">'+
 	    			      "<tr>"+
 						    "<td colspan='2' style='float: left;' width='100%'><hr></hr></td>"+
@@ -445,15 +445,15 @@ Ext.define('pxp.controller.Egreso', {
 						  "</table></div>");
 						 
 	    			
-	    			me.getEgresolist().down('#resumenEgreso').setHtml(tpl.apply(Response.countData));
+	    			me.getRendicionlist().down('#resumenRendicion').setHtml(tpl.apply(Response.countData));
 	    			
-	    			me.getEgresolist().down('list').unmask();
+	    			me.getRendicionlist().down('list').unmask();
 	    		
 	},
     	
     onActiveFilter:function(searchField){
     	var me = this,
-    	    store = me.getEgresolist().down('list').getStore();
+    	    store = me.getRendicionlist().down('list').getStore();
     	    
     	var extra = store.getProxy().getExtraParams();
     	
@@ -476,7 +476,7 @@ Ext.define('pxp.controller.Egreso', {
     
     onClearFilter:function(value){
     	var me = this,
-    	    store = me.getEgresolist().down('list').getStore();
+    	    store = me.getRendicionlist().down('list').getStore();
     	    extra = store.getProxy().getExtraParams();
     	    
     	delete extra.par_filtro;

@@ -9,9 +9,9 @@
  * Loans based on the values selected (see the onFilter method in app/controllers/loans.js).
  *
  */
-Ext.define('pxp.view.egreso.EgresoForm', {
+Ext.define('pxp.view.rendicion.RendicionForm', {
     extend: 'Ext.form.Panel',
-    xtype: 'egresoform',
+    xtype: 'rendicionform',
     requires: [
         'Ext.field.Select',
         'Ext.field.Search',
@@ -149,7 +149,7 @@ Ext.define('pxp.view.egreso.EgresoForm', {
 				             {
 				                xtype: 'textfield',
 				                labelWidth:100,
-				                label: 'Colecta',
+				                label: 'Tipo Movimiento',
 				                name:'desc_tipo_movimiento',
 				                flex: Ext.os.is.Phone?1:undefined,
 				                itemId:'desc_tipo_movimiento',
@@ -183,8 +183,7 @@ Ext.define('pxp.view.egreso.EgresoForm', {
 		                        store: {
 		                            data: [
 		                                
-		                                { codigo: 'operacion', title: 'Operacion'},
-		                                { codigo: 'egreso_traspaso', title: 'Egreso por Traspaso'}
+		                                { codigo: 'rendicion', title: 'Rendición'}
 		                            ]
 		                        }
 		                     }
@@ -256,9 +255,7 @@ Ext.define('pxp.view.egreso.EgresoForm', {
 		                                { codigo: 'factura', title: 'Factura'},
 		                                { codigo: 'recibo_bien', title: 'Recibo de Bien'},
 		                                { codigo: 'recibo_servicio', title: 'Recibo de Servicio'},
-		                                { codigo: 'recibo_sin_retencion', title: 'Recibo sin retención'},
-		                                { codigo: 'recibo_piedad', title: 'Recibo piedad(diaconos, por rendir)'},
-		                                { codigo: 'recibo_especial', title: 'Recibo especial (por rendir)'}
+		                                { codigo: 'recibo_sin_retencion', title: 'Recibo sin retención'}
 		                            ]
 		                        }
 		                     }

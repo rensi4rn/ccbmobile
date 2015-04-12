@@ -9,17 +9,17 @@
  * Loans based on the values selected (see the onFilter method in app/controllers/loans.js).
  *
  */
-Ext.define('pxp.view.agenda.AgendaFormFilter', {
+Ext.define('pxp.view.rendicion.RendicionFormFilter', {
     extend: 'Ext.form.Panel',
-    xtype: 'agendaformfilter',
+    xtype: 'rendicionformfilter',
     requires: [
         'Ext.field.Select',
         'Ext.field.Search',
         'Ext.Toolbar',
         'Ext.plugin.ListPaging',
         'Ext.plugin.PullRefresh',
-        'pxp.view.component.Gestion',
-        'pxp.view.component.Lugar'
+        'pxp.view.component.CasaOracion',
+        'pxp.view.component.Gestion'
     ],
     
     config: {
@@ -55,32 +55,7 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
            	layout: {
 	            type: 'vbox'
 	        },
-            items:[ {
-			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: Ext.os.is.Phone?'vbox':'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-					        {
-		                        xtype: 'datepickerfield',
-		                        itemId: 'fecha',
-		                        name:'fecha',
-		                        labelWidth:100,
-		                        dateFormat: 'd/m/Y',
-		                        destroyPickerOnHide: true,
-		                        width:Ext.os.is.Phone?undefined:'150',
-		                        label: 'Fecha',
-		                        picker : {
-		                        	  yearFrom : new Date().getFullYear(),
-						     		  yearTo: new Date().getFullYear()
-						     	}
-		                        
-		                    }
-		                 ]
-		            },
+            items:[  
 		            
 		            {
 			           	xtype: 'fieldset',
@@ -93,22 +68,22 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
 				        items:[
 				             {
 				                xtype: 'hiddenfield',
-				                itemId:'id_lugar',
-				                name:'id_lugar'
+				                itemId:'id_casa_oracion',
+				                name:'id_casa_oracion'
 				             },
 				             {
 				                xtype: 'textfield',
 				                labelWidth:100,
-				                label: 'Lugar',
-				                name:'nombre',
+				                label: 'Casa Oración',
+				                name:'nombre_co',
 				                flex: Ext.os.is.Phone?1:undefined,
-				                itemId:'nombre',
+				                itemId:'nombre_co',
 				                readOnly:true
 				                
 				             },
 				             {
 				                xtype: 'button',
-				                itemId:'lugarbutton',
+				                itemId:'casaoracionbutton',
 				                iconCls: 'ico-customers-small'
 				             }
 				         ]
@@ -141,37 +116,6 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
 				             {
 				                xtype: 'button',
 				                itemId:'gestionbutton',
-				                iconCls: 'ico-customers-small'
-				             }
-				         ]
-				     },
-		            {
-			           	xtype: 'fieldset',
-			           	margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: 'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-				             {
-				                xtype: 'hiddenfield',
-				                itemId:'id_tipo_movimiento',
-				                name:'id_tipo_movimiento'
-				             },
-				             {
-				                xtype: 'textfield',
-				                labelWidth:100,
-				                label: 'Colecta',
-				                name:'desc_tipo_movimiento',
-				                flex: Ext.os.is.Phone?1:undefined,
-				                itemId:'desc_tipo_movimiento',
-				                readOnly:true
-				                
-				             },
-				             {
-				                xtype: 'button',
-				                itemId: 'tipomovimientobutton',
 				                iconCls: 'ico-customers-small'
 				             }
 				         ]

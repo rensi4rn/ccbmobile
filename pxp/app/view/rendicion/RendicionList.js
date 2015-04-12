@@ -2,11 +2,11 @@
  * @class kiva.views.List
  * @extends Ext.DataView
  */
-Ext.define('pxp.view.egreso.EgresoList', {
+Ext.define('pxp.view.rendicion.RendicionList', {
     extend: 'Ext.Container',
-    xtype : 'egresolist',
+    xtype : 'rendicionlist',
     requires: [
-        'pxp.view.egreso.EgresoTbar',
+        'pxp.view.rendicion.RendicionTbar',
         'Ext.plugin.ListPaging',
         'Ext.plugin.PullRefresh',
         'Ext.List',
@@ -21,13 +21,13 @@ Ext.define('pxp.view.egreso.EgresoList', {
         },
     	items: [
     	       {
-	           	 xtype : 'egresotbar',
+	           	 xtype : 'rendiciontbar',
 	             docked: 'top'
 	           },
 			   {
 			   	  xtype: 'panel',
 			   	   ui: 'light',
-			   	  itemId: 'resumenEgreso',
+			   	  itemId: 'resumenRendicion',
 			   	  html: '<p></p>',
 	              docked: 'bottom'
 		
@@ -35,9 +35,9 @@ Ext.define('pxp.view.egreso.EgresoList', {
     },
     initialize:function(){
     	var me = this;
-    	me.store = Ext.create('pxp.store.Egreso');
-    	me.store.getProxy().setExtraParams({'tipo_concepto': 'egreso'});
     	
+    	me.store = Ext.create('pxp.store.Egreso');
+    	me.store.getProxy().setExtraParams({'tipo_concepto': 'rendicion'});
 	   
 	   me.add([
 	   	    {

@@ -36,7 +36,9 @@ Ext.application({
         'regionevento.RegionEvento',
         'ingreso.Ingreso',
         'egreso.Egreso',
-        'agenda.Agenda'      
+        'agenda.Agenda' ,
+        'rendicion.Rendicion',
+        'saldos.Saldos'     
     ],
     
     controllers : [
@@ -49,7 +51,9 @@ Ext.application({
         'RegionEvento',
         'Ingreso',
         'Egreso',
-        'Agenda'
+        'Agenda',
+        'Rendicion',
+        'Saldos'
     ],
 
     icon: {

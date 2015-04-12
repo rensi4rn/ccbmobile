@@ -9,17 +9,17 @@
  * Loans based on the values selected (see the onFilter method in app/controllers/loans.js).
  *
  */
-Ext.define('pxp.view.agenda.AgendaFormFilter', {
+Ext.define('pxp.view.saldos.SaldosFormFilter', {
     extend: 'Ext.form.Panel',
-    xtype: 'agendaformfilter',
+    xtype: 'saldosformfilter',
     requires: [
         'Ext.field.Select',
         'Ext.field.Search',
         'Ext.Toolbar',
         'Ext.plugin.ListPaging',
         'Ext.plugin.PullRefresh',
-        'pxp.view.component.Gestion',
-        'pxp.view.component.Lugar'
+        'pxp.view.component.CasaOracion',
+        'pxp.view.component.Gestion'
     ],
     
     config: {
@@ -31,7 +31,13 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
                 ui: 'light',
                 docked: 'bottom',
                 items: [
-                   
+                    {
+                        text: 'Reset',
+                        xtype: 'button',
+                        iconMask: true,
+                        ui: 'decline',
+                        itemId: 'reset'
+                    },
                     { xtype: 'spacer' },
                     {
                        xtype: 'title',
@@ -55,7 +61,7 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
            	layout: {
 	            type: 'vbox'
 	        },
-            items:[ {
+            items:[  {
 			           	xtype: 'fieldset',
 			           	margin:'5 5 5 5',
 			           	//flex: 1 ,
@@ -71,18 +77,17 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
 		                        labelWidth:100,
 		                        dateFormat: 'd/m/Y',
 		                        destroyPickerOnHide: true,
-		                        width:Ext.os.is.Phone?undefined:'150',
-		                        label: 'Fecha',
 		                        picker : {
-		                        	  yearFrom : new Date().getFullYear(),
+		                        	  yearFrom : 2014,
 						     		  yearTo: new Date().getFullYear()
-						     	}
+						     	},
+		                        width: Ext.os.is.Phone?undefined:'150',
+		                        label: 'Fecha'
 		                        
 		                    }
 		                 ]
 		            },
-		            
-		            {
+                      {
 			           	xtype: 'fieldset',
 			           	margin:'5 5 5 5',
 			           	//flex: 1 ,
@@ -97,13 +102,18 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
 				                name:'id_lugar'
 				             },
 				             {
+				                xtype: 'hiddenfield',
+				                itemId: 'id_region',
+				                name: 'id_region'
+				             },
+				             {
 				                xtype: 'textfield',
 				                labelWidth:100,
 				                label: 'Lugar',
-				                name:'nombre',
+				                name: 'nombre',
 				                flex: Ext.os.is.Phone?1:undefined,
-				                itemId:'nombre',
-				                readOnly:true
+				                itemId: 'nombre',
+				                readOnly: true
 				                
 				             },
 				             {
@@ -115,7 +125,7 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
 				     },
 		            {
 			           	xtype: 'fieldset',
-			           	 margin:'5 5 5 5',
+			           	margin:'5 5 5 5',
 			           	//flex: 1 ,
 		                layout: {
 				            type: 'hbox',
@@ -124,28 +134,60 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
 				        items:[
 				             {
 				                xtype: 'hiddenfield',
-				                itemId:'id_gestion',
-				                name: 'id_gestion'
+				                itemId:'id_casa_oracion',
+				                name:'id_casa_oracion'
 				             },
 				             {
 				                xtype: 'textfield',
-				                labelWidth: 100,
-				                label: 'Gestión',
+				                labelWidth:100,
+				                label: 'Casa Oración',
+				                name:'nombre_co',
 				                flex: Ext.os.is.Phone?1:undefined,
 				                //flex: 1,
-				                itemId: 'gestion',
-				                name: 'gestion',
+				                itemId:'nombre_co',
 				                readOnly:true
 				                
 				             },
 				             {
 				                xtype: 'button',
-				                itemId:'gestionbutton',
+				                itemId:'casaoracionbutton',
 				                iconCls: 'ico-customers-small'
 				             }
 				         ]
 				     },
-		            {
+		             {
+			           	xtype: 'fieldset',
+			           	margin:'5 5 5 5',
+			           	//flex: 1 ,
+		                layout: {
+				            type: 'hbox',
+				            align: 'stretch'
+				        },
+				        items:[
+				             {
+				                xtype: 'hiddenfield',
+				                itemId:'id_obrero',
+				                name:'id_obrero'
+				             },
+				             {
+				                xtype: 'textfield',
+				                labelWidth:100,
+				                label: 'Obrero',
+				                name:'desc_obrero',
+				                flex: Ext.os.is.Phone?1:undefined,
+				                //flex: 1,
+				                itemId:'desc_obrero',
+				                readOnly:true
+				                
+				             },
+				             {
+				                xtype: 'button',
+				                itemId:'obrerobutton',
+				                iconCls: 'ico-customers-small'
+				             }
+				         ]
+				      },
+				     {
 			           	xtype: 'fieldset',
 			           	margin:'5 5 5 5',
 			           	//flex: 1 ,

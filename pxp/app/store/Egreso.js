@@ -26,7 +26,7 @@ Ext.define('pxp.store.Egreso', {
 		        totalProperty: 'total'
 		    },
 		    
-		    listeners:{
+		    listeners: {
 		    	'exception':function(proxy, response, operation){
 		                    var Response = Ext.JSON.decode(response.responseText);
 		                    pxp.app.hideMask();
