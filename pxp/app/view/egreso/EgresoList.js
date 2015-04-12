@@ -36,7 +36,7 @@ Ext.define('pxp.view.egreso.EgresoList', {
     initialize:function(){
     	var me = this;
     	me.store = Ext.create('pxp.store.Egreso');
-    	me.store.getProxy().setExtraParams({'tipo_concepto': 'egreso'});
+    	
     	
 	   
 	   me.add([

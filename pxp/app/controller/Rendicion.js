@@ -415,6 +415,7 @@ Ext.define('pxp.controller.Rendicion', {
 	    
 	    	store.getProxy().setExtraParams({
 	    		     'id_casa_oracion': id_casa_oracion,
+	    		     'tipo_concepto': 'rendicion',
 	    		     'id_gestion': id_gestion,
 	    		     'tipolist': 'mobile',
 	    		     'sort':"fecha",
