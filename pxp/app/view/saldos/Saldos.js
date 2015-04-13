@@ -14,6 +14,7 @@ Ext.define('pxp.view.saldos.Saldos', {
     config: {
         //fullscreen: true,
         layout: 'fit',
+        
         items: [
                {
 	                xtype: 'saldosformfilter',

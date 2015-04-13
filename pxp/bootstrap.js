@@ -11,6 +11,7 @@
 Ext.Loader.addClassPathMappings({
   "Ext": "touch/src",
   "Ext-more": "touch/src/core/Ext-more.js",
+  "Ext.Boot": ".sencha/app/Boot.js",
   "Ext.DomHelper": "touch/src/dom/Helper.js",
   "Ext.DomQuery": "touch/src/dom/Query.js",
   "Ext.Element-alignment": "touch/src/dom/Element.alignment.js",
@@ -31,7 +32,11 @@ Ext.Loader.addClassPathMappings({
   "Ext.device.sqlite.SQLResultSet": "touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLResultSetRowList": "touch/src/device/sqlite/Sencha.js",
   "Ext.device.sqlite.SQLTransaction": "touch/src/device/sqlite/Sencha.js",
+  "Ext.ux.field.TimePicker": "touch/src/ux/field/DateTimePicker.js",
+  "Ext.ux.picker.Time": "touch/src/ux/picker/DateTime.js",
   "LocalStorageCookie": "app/lib/LocalStorageCookie.js",
+  "MyApp.util.PaintMonitor": "app.js",
+  "MyApp.util.SizeMonitor": "app.js",
   "Obs": "app/controller/VoBoWf.js",
   "pxp": "app"
 });
@@ -641,6 +646,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.device.analytics.Cordova": [],
   "Ext.ux.device.twitter.Abstract": [],
   "Ext.ux.device.twitter.Cordova": [],
+  "Ext.ux.field.TimePicker": [],
   "Ext.ux.parse.Helper": [
     "ParseHelper"
   ],
@@ -650,6 +656,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.ux.parse.Store": [],
   "Ext.ux.parse.association.Pointer": [],
   "Ext.ux.parse.association.Relation": [],
+  "Ext.ux.picker.Time": [],
   "Ext.viewport.Android": [],
   "Ext.viewport.Default": [],
   "Ext.viewport.Ios": [],
@@ -658,31 +665,61 @@ Ext.ClassManager.addNameAlternateMappings({
     "Ext.viewport.WP"
   ],
   "LocalStorageCookie": [],
+  "MyApp.util.PaintMonitor": [],
+  "MyApp.util.SizeMonitor": [],
   "Obs": [],
+  "pxp.controller.Agenda": [],
+  "pxp.controller.Egreso": [],
+  "pxp.controller.Ingreso": [],
   "pxp.controller.Interino": [],
   "pxp.controller.Login": [],
   "pxp.controller.Main": [],
   "pxp.controller.Obrero": [],
+  "pxp.controller.RegionEvento": [],
+  "pxp.controller.Rendicion": [],
+  "pxp.controller.Saldos": [],
   "pxp.controller.VoBoFondo": [],
   "pxp.controller.VoBoWf": [],
   "pxp.controller.phone.Main": [],
   "pxp.controller.tablet.Main": [],
   "pxp.lib.ApiRestClient": [],
   "pxp.lib.LocalStorageCookie": [],
+  "pxp.model.Agenda": [],
   "pxp.model.Cargo": [],
+  "pxp.model.CasaOracion": [],
+  "pxp.model.ConceptoIngas": [],
+  "pxp.model.Egreso": [],
+  "pxp.model.Evento": [],
   "pxp.model.FuncionarioCargo": [],
+  "pxp.model.Gestion": [],
+  "pxp.model.Ingreso": [],
   "pxp.model.Interino": [],
   "pxp.model.LocalStorageCookie": [],
+  "pxp.model.Lugar": [],
   "pxp.model.Obrero": [],
+  "pxp.model.OrdenTrabajo": [],
+  "pxp.model.RegionEvento": [],
+  "pxp.model.TipoMovimiento": [],
   "pxp.model.UserInterface": [],
   "pxp.model.VoBoFondo": [],
   "pxp.model.VoBoWf": [],
   "pxp.profile.Phone": [],
   "pxp.profile.Tablet": [],
+  "pxp.store.Agenda": [],
   "pxp.store.Cargos": [],
+  "pxp.store.CasaOracion": [],
+  "pxp.store.ConceptoIngas": [],
+  "pxp.store.Egreso": [],
+  "pxp.store.Evento": [],
   "pxp.store.FuncionarioCargos": [],
+  "pxp.store.Gestion": [],
+  "pxp.store.Ingreso": [],
   "pxp.store.Interinos": [],
+  "pxp.store.Lugar": [],
   "pxp.store.Obrero": [],
+  "pxp.store.OrdenTrabajo": [],
+  "pxp.store.RegionEvento": [],
+  "pxp.store.TipoMovimiento": [],
   "pxp.store.UserInterface": [],
   "pxp.store.VoBoFondo": [],
   "pxp.store.VoBoWf": [],
@@ -691,17 +728,54 @@ Ext.ClassManager.addNameAlternateMappings({
   "pxp.view.Carousel": [],
   "pxp.view.Login": [],
   "pxp.view.MainMenu": [],
+  "pxp.view.agenda.Agenda": [],
+  "pxp.view.agenda.AgendaForm": [],
+  "pxp.view.agenda.AgendaFormFilter": [],
+  "pxp.view.agenda.AgendaList": [],
+  "pxp.view.agenda.AgendaTbar": [],
   "pxp.view.component.Cargo": [],
+  "pxp.view.component.CasaOracion": [],
+  "pxp.view.component.ConceptoIngas": [],
+  "pxp.view.component.Evento": [],
   "pxp.view.component.FuncionarioCargo": [],
+  "pxp.view.component.Gestion": [],
+  "pxp.view.component.Lugar": [],
+  "pxp.view.component.Obrero": [],
+  "pxp.view.component.OrdenTrabajo": [],
+  "pxp.view.component.TipoMovimiento": [],
+  "pxp.view.egreso.Egreso": [],
+  "pxp.view.egreso.EgresoForm": [],
+  "pxp.view.egreso.EgresoFormFilter": [],
+  "pxp.view.egreso.EgresoList": [],
+  "pxp.view.egreso.EgresoTbar": [],
+  "pxp.view.ingreso.Ingreso": [],
+  "pxp.view.ingreso.IngresoForm": [],
+  "pxp.view.ingreso.IngresoFormFilter": [],
+  "pxp.view.ingreso.IngresoList": [],
+  "pxp.view.ingreso.IngresoTbar": [],
   "pxp.view.interino.Interino": [],
   "pxp.view.interino.InterinoForm": [],
   "pxp.view.interino.InterinoList": [],
   "pxp.view.interino.InterinoTbar": [],
   "pxp.view.obrero.Obrero": [],
+  "pxp.view.obrero.ObreroForm": [],
   "pxp.view.obrero.ObreroList": [],
   "pxp.view.obrero.ObreroTbar": [],
   "pxp.view.phone.Main": [],
   "pxp.view.phone.Navigation": [],
+  "pxp.view.regionevento.RegionEvento": [],
+  "pxp.view.regionevento.RegionEventoForm": [],
+  "pxp.view.regionevento.RegionEventoList": [],
+  "pxp.view.regionevento.RegionEventoTbar": [],
+  "pxp.view.rendicion.Rendicion": [],
+  "pxp.view.rendicion.RendicionForm": [],
+  "pxp.view.rendicion.RendicionFormFilter": [],
+  "pxp.view.rendicion.RendicionList": [],
+  "pxp.view.rendicion.RendicionTbar": [],
+  "pxp.view.saldos.Saldos": [],
+  "pxp.view.saldos.SaldosFormFilter": [],
+  "pxp.view.saldos.SaldosPanel": [],
+  "pxp.view.saldos.SaldosTbar": [],
   "pxp.view.tablet.Main": [],
   "pxp.view.vobofondo.FormFondoEstAnt": [],
   "pxp.view.vobofondo.FormFondoEstSig": [],
@@ -1412,6 +1486,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.device.analytics.Cordova": [],
   "Ext.ux.device.twitter.Abstract": [],
   "Ext.ux.device.twitter.Cordova": [],
+  "Ext.ux.field.TimePicker": [
+    "widget.timepickerfield"
+  ],
   "Ext.ux.parse.Helper": [],
   "Ext.ux.parse.Model": [],
   "Ext.ux.parse.Proxy": [
@@ -1427,6 +1504,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.parse.association.Relation": [
     "association.relation"
   ],
+  "Ext.ux.picker.Time": [
+    "widget.timepicker"
+  ],
   "Ext.viewport.Android": [],
   "Ext.viewport.Default": [
     "widget.viewport"
@@ -1435,31 +1515,61 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.viewport.Viewport": [],
   "Ext.viewport.WindowsPhone": [],
   "LocalStorageCookie": [],
+  "MyApp.util.PaintMonitor": [],
+  "MyApp.util.SizeMonitor": [],
   "Obs": [],
+  "pxp.controller.Agenda": [],
+  "pxp.controller.Egreso": [],
+  "pxp.controller.Ingreso": [],
   "pxp.controller.Interino": [],
   "pxp.controller.Login": [],
   "pxp.controller.Main": [],
   "pxp.controller.Obrero": [],
+  "pxp.controller.RegionEvento": [],
+  "pxp.controller.Rendicion": [],
+  "pxp.controller.Saldos": [],
   "pxp.controller.VoBoFondo": [],
   "pxp.controller.VoBoWf": [],
   "pxp.controller.phone.Main": [],
   "pxp.controller.tablet.Main": [],
   "pxp.lib.ApiRestClient": [],
   "pxp.lib.LocalStorageCookie": [],
+  "pxp.model.Agenda": [],
   "pxp.model.Cargo": [],
+  "pxp.model.CasaOracion": [],
+  "pxp.model.ConceptoIngas": [],
+  "pxp.model.Egreso": [],
+  "pxp.model.Evento": [],
   "pxp.model.FuncionarioCargo": [],
+  "pxp.model.Gestion": [],
+  "pxp.model.Ingreso": [],
   "pxp.model.Interino": [],
   "pxp.model.LocalStorageCookie": [],
+  "pxp.model.Lugar": [],
   "pxp.model.Obrero": [],
+  "pxp.model.OrdenTrabajo": [],
+  "pxp.model.RegionEvento": [],
+  "pxp.model.TipoMovimiento": [],
   "pxp.model.UserInterface": [],
   "pxp.model.VoBoFondo": [],
   "pxp.model.VoBoWf": [],
   "pxp.profile.Phone": [],
   "pxp.profile.Tablet": [],
+  "pxp.store.Agenda": [],
   "pxp.store.Cargos": [],
+  "pxp.store.CasaOracion": [],
+  "pxp.store.ConceptoIngas": [],
+  "pxp.store.Egreso": [],
+  "pxp.store.Evento": [],
   "pxp.store.FuncionarioCargos": [],
+  "pxp.store.Gestion": [],
+  "pxp.store.Ingreso": [],
   "pxp.store.Interinos": [],
+  "pxp.store.Lugar": [],
   "pxp.store.Obrero": [],
+  "pxp.store.OrdenTrabajo": [],
+  "pxp.store.RegionEvento": [],
+  "pxp.store.TipoMovimiento": [],
   "pxp.store.UserInterface": [],
   "pxp.store.VoBoFondo": [],
   "pxp.store.VoBoWf": [],
@@ -1472,11 +1582,80 @@ Ext.ClassManager.addNameAliasMappings({
   "pxp.view.MainMenu": [
     "widget.mainmenuview"
   ],
+  "pxp.view.agenda.Agenda": [
+    "widget.agenda"
+  ],
+  "pxp.view.agenda.AgendaForm": [
+    "widget.agendaform"
+  ],
+  "pxp.view.agenda.AgendaFormFilter": [
+    "widget.agendaformfilter"
+  ],
+  "pxp.view.agenda.AgendaList": [
+    "widget.agendalist"
+  ],
+  "pxp.view.agenda.AgendaTbar": [
+    "widget.agendatbar"
+  ],
   "pxp.view.component.Cargo": [
     "widget.cargocomp"
   ],
+  "pxp.view.component.CasaOracion": [
+    "widget.casaoracioncomp"
+  ],
+  "pxp.view.component.ConceptoIngas": [
+    "widget.conceptoingascomp"
+  ],
+  "pxp.view.component.Evento": [
+    "widget.eventocomp"
+  ],
   "pxp.view.component.FuncionarioCargo": [
     "widget.funcionariocargocomp"
+  ],
+  "pxp.view.component.Gestion": [
+    "widget.gestioncomp"
+  ],
+  "pxp.view.component.Lugar": [
+    "widget.lugarcomp"
+  ],
+  "pxp.view.component.Obrero": [
+    "widget.obrerocomp"
+  ],
+  "pxp.view.component.OrdenTrabajo": [
+    "widget.ordentrabajocomp"
+  ],
+  "pxp.view.component.TipoMovimiento": [
+    "widget.tipomovimientocomp"
+  ],
+  "pxp.view.egreso.Egreso": [
+    "widget.egreso"
+  ],
+  "pxp.view.egreso.EgresoForm": [
+    "widget.egresoform"
+  ],
+  "pxp.view.egreso.EgresoFormFilter": [
+    "widget.egresoformfilter"
+  ],
+  "pxp.view.egreso.EgresoList": [
+    "widget.egresolist"
+  ],
+  "pxp.view.egreso.EgresoTbar": [
+    "widget.egresotbar"
+  ],
+  "pxp.view.ingreso.Ingreso": [
+    "widget.ingreso"
+  ],
+  "pxp.view.ingreso.IngresoForm": [
+    "widget.ingresoform"
+  ],
+  "pxp.view.ingreso.IngresoFormFilter": [
+    "widget.ingresoformfilter"
+  ],
+  "pxp.view.ingreso.IngresoList": [
+    "widget.ingresolist"
+  ],
+  "pxp.view.ingreso.IngresoTbar": [
+    "widget.ingresotbar"
   ],
   "pxp.view.interino.Interino": [
     "widget.interino"
@@ -1493,6 +1672,9 @@ Ext.ClassManager.addNameAliasMappings({
   "pxp.view.obrero.Obrero": [
     "widget.obrero"
   ],
+  "pxp.view.obrero.ObreroForm": [
+    "widget.obreroform"
+  ],
   "pxp.view.obrero.ObreroList": [
     "widget.obrerolist"
   ],
@@ -1504,6 +1686,45 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "pxp.view.phone.Navigation": [
     "widget.navigation"
+  ],
+  "pxp.view.regionevento.RegionEvento": [
+    "widget.interino"
+  ],
+  "pxp.view.regionevento.RegionEventoForm": [
+    "widget.regioneventoform"
+  ],
+  "pxp.view.regionevento.RegionEventoList": [
+    "widget.regioneventolist"
+  ],
+  "pxp.view.regionevento.RegionEventoTbar": [
+    "widget.regioneventotbar"
+  ],
+  "pxp.view.rendicion.Rendicion": [
+    "widget.rendicion"
+  ],
+  "pxp.view.rendicion.RendicionForm": [
+    "widget.rendicionform"
+  ],
+  "pxp.view.rendicion.RendicionFormFilter": [
+    "widget.rendicionformfilter"
+  ],
+  "pxp.view.rendicion.RendicionList": [
+    "widget.rendicionlist"
+  ],
+  "pxp.view.rendicion.RendicionTbar": [
+    "widget.rendiciontbar"
+  ],
+  "pxp.view.saldos.Saldos": [
+    "widget.egreso"
+  ],
+  "pxp.view.saldos.SaldosFormFilter": [
+    "widget.saldosformfilter"
+  ],
+  "pxp.view.saldos.SaldosPanel": [
+    "widget.saldospanel"
+  ],
+  "pxp.view.saldos.SaldosTbar": [
+    "widget.saldostbar"
   ],
   "pxp.view.tablet.Main": [
     "widget.main"

@@ -24,6 +24,9 @@ Ext.define('pxp.view.saldos.SaldosFormFilter', {
     
     config: {
     	ui: 'light',
+    	layout: 'fit',
+        flex: 1 ,
+        scrollable: false,
     	showAnimation: { type: "slide", direction: "down" } ,
         items: [
             {
@@ -57,7 +60,8 @@ Ext.define('pxp.view.saldos.SaldosFormFilter', {
            
            {
            	xtype: 'fieldset',
-           	flex: 1,
+           	flex: 1, 
+           	scrollable: true,
            	layout: {
 	            type: 'vbox'
 	        },

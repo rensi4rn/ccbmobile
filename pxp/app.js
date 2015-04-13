@@ -12,7 +12,11 @@
 Ext.application({
     name: 'pxp',
     requires: [
+        'pxp.util.PaintMonitor',
+        'pxp.util.SizeMonitor',
         'Ext.MessageBox',
+        'Ext.form.Panel',
+        'Ext.field.Hidden',
         'pxp.lib.LocalStorageCookie',
         'Ext.data.JsonP',
         'pxp.lib.ApiRestClient',
@@ -78,15 +82,16 @@ Ext.application({
     	//aPI REST CONFIG
         pxp.apiRest = Ext.create('pxp.lib.ApiRestClient',_CONFIG); 
         
-    	
-    	pxp.app = this;
-        // Destroy the #appLoadingIndicator element
+    	// Destroy the #appLoadingIndicator element
         Ext.fly('appLoadingIndicator').destroy();
+    	pxp.app = this;
+        
         pxp.app.cookie = new pxp.lib.LocalStorageCookie();
         
         // Initialize the main view
         Ext.Viewport.add(Ext.create('pxp.view.Login'));
-         Ext.util.Format.defaultDateFormat = 'm/d/Y';
+        Ext.util.Format.defaultDateFormat = 'm/d/Y';
+         
         
     },
     

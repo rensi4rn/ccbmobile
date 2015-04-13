@@ -17,6 +17,8 @@ Ext.define('pxp.view.Login', {
         itemId:'loginviewid',
         //style: 'background-color:#FFFFFF',
         //ui: 'whait',
+       // fullscreen:true,
+        scrollable:true,
         enableSubmissionForm:false,
         items: [
             {
