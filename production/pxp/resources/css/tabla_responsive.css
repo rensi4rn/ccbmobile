@@ -1,3 +1,20 @@
+
+.red
+{
+    background: red !important;
+}
+.blue
+{
+    background: blue !important;
+}
+.green
+{
+    background: green !important;
+}
+
+       
+
+
 /*Modelo responsive*/
 .pxp_no-more-tables thead th {
     text-align: left;

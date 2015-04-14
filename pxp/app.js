@@ -42,7 +42,8 @@ Ext.application({
         'egreso.Egreso',
         'agenda.Agenda' ,
         'rendicion.Rendicion',
-        'saldos.Saldos'     
+        'saldos.Saldos',
+        'calendario.Calendario'   
     ],
     
     controllers : [
@@ -57,7 +58,8 @@ Ext.application({
         'Egreso',
         'Agenda',
         'Rendicion',
-        'Saldos'
+        'Saldos',
+        'Calendario'
     ],
 
     icon: {

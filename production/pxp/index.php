@@ -6,7 +6,7 @@ if ($_SERVER['SERVER_PORT']!='443') {
     //header("Location:https://".$_SERVER['HTTP_HOST'].$_SERVER['PHP_SELF']); 
 }
 ?><!DOCTYPE HTML>
-<html>
+<html manifest="cache.appcache" lang="es-BO">
 <head>
     <meta charset="UTF-8">
     <meta name="format-detection" content="telephone=no">

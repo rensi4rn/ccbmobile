@@ -99,11 +99,10 @@
      *      }
      */
     "css": [
-       {
+         {
             "path": "resources/css/app.css",
             "remote": true 
         },
-        
         {
             "path": "resources/css/slidenav.css",
             "remote": true 
@@ -112,7 +111,22 @@
         {
             "path": "resources/css/tabla_responsive.css",
             "remote": true 
+        },
+        {
+            "path": "resources/css/TouchCalendarView.css",
+            "remote": true 
+        },
+        
+        {
+            "path": "resources/css/skin1.css",
+            "remote": true 
+        },
+        {
+            "path": "resources/css/TouchCalendarEvents.css",
+            "remote": true 
         }
+        
+        
         
         
     ],
@@ -144,6 +158,7 @@
      */
     "resources": [
         "resources/img",
+        "resources/images",
         "resources/icons",
         "resources/startup",
         "resources/js",
