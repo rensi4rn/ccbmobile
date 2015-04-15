@@ -161,6 +161,7 @@ Ext.define('pxp.controller.CasaOracion', {
 	    
 	    	store.getProxy().setExtraParams({
 	    		     'id_lugar': id_lugar,
+	    		     'verificar': 'no',
 	    		     'tipolist': 'mobile',
 	    		     'sort':"codigo",
 	    		     "dir":"DESC"
