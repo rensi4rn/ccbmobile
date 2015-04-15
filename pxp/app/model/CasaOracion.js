@@ -19,7 +19,7 @@ Ext.define('pxp.model.CasaOracion', {
 			{name:'usr_reg', type: 'string'},
 			{name:'usr_mod', type: 'string'},
 			'desc_region',
-			'desc_lugar'
+			'desc_lugar','latitud','longitud','zoom'
 			]
 		}
 });

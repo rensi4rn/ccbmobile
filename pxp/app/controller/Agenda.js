@@ -65,6 +65,9 @@ Ext.define('pxp.controller.Agenda', {
             },
             'agendaformfilter #aplicar': {
             	tap:'onInitFilter'
+            },
+            'agendaformfilter': {
+            	activate:'onInitForm'
             }
             
             
@@ -73,7 +76,66 @@ Ext.define('pxp.controller.Agenda', {
     },
    
    
-    
+   onInitForm: function(){
+    	var me = this,
+    	    form = this.getAgendaformfilter();
+    	if(!me.lugarcmp){
+    		
+    		var cmphidden = form.down('#id_lugar'),
+    		    cmpText = form.down('#nombre');
+    		
+    	    me.lugarcmp = Ext.create('pxp.view.component.Lugar',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText,
+	    	   	'displayColumn':'nombre',
+	    	   	'idColumn':'id_lugar'
+    	   });
+    	   
+    	   Ext.Viewport.add(me.lugarcmp);
+    	   me.lugarcmp.hide();
+    	}
+    	
+    	var store = me.lugarcmp.store;    	    
+    	pxp.app.showMask();   		
+    	store.load({
+    		start: 0,
+    		limit: 20,
+    		page: 1,
+    		callback:function(rec){
+    			form.down('#nombre').setValue(rec[0].data.nombre);
+				form.down('#id_lugar').setValue(rec[0].data.id_lugar);
+    		
+    	}});
+    	
+    	//inicia gestion
+    	
+    	if(!me.gestioncmp){
+    		console.log('1')
+    		var cmphidden = me.getAgendaformfilter().down('#id_gestion'),
+    		    cmpText = me.getAgendaformfilter().down('#gestion');
+    		me.gestioncmp = Ext.create('pxp.view.component.Gestion',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText,
+	    	   	'displayColumn':'gestion',
+	    	   	'idColumn':'id_gestion'
+    	   });
+    	   Ext.Viewport.add(me.gestioncmp);
+    	   me.gestioncmp.hide();
+    	}
+    	
+    	var storeges = me.gestioncmp.store;    	    
+    	storeges.load({
+    		start: 0,
+    		limit: 20,
+    		page: 1,
+    		callback:function(rec){
+    			pxp.app.hideMask();
+	    		form.down('#gestion').setValue(rec[0].data.gestion);
+				form.down('#id_gestion').setValue(rec[0].data.id_gestion);
+    		
+    	}});
+    	
+    }, 
     
    onAdd:function(){
    	
@@ -100,228 +162,8 @@ Ext.define('pxp.controller.Agenda', {
    },
    
   
-   
-    
-   
-   
-   onFormEdit: function(list, index, target, record, e, eOpts){
-   	    this.getAgendaform().show();
-    	this.getAgendalist().hide();
-    	this.getAgendaform().reset(); 
-    	this.getAgendaform().setRecord(record);
-    	this.getAgendaform().down('title').setTitle('Editar Ingreso');
-    	
-    	
-   },
-    
-   onSave:function(){
-    	
-    	var me = this,
-    	    fecha = me.getAgendaform().down('#fecha'),
-    	    estado = me.getAgendaform().down('#estado'),
-    	    params =  me.getAgendaform().getValues(),
-    	    id_obrero = me.getAgendaform().down('#id_obrero'),
-    	    id_casa_oracion = me.getAgendaformfilter().down('#id_casa_oracion').getValue(),
-            id_gestion = me.getAgendaformfilter().down('#id_gestion').getValue();
-        
-        params  = Ext.apply(params,{obs:'', tipo: 'ingreso', id_casa_oracion: id_casa_oracion, id_gestion: id_gestion});
-       
-        
-        if(!fecha.getValue()){
-         	alert('Necesitamos que indique la fecha', Ext.emptyFn);
-            return;
-        } 
-        
-        if(!id_obrero.getValue()){
-         	alert('Indique un obrero responsable', Ext.emptyFn);
-            return;
-        }   
-             
-            
-        pxp.app.showMask();      
-    	Ext.Ajax.request({
-		        withCredentials: true,
-	            useDefaultXhrHeader: false,
-	            url: pxp.apiRest._url('admin/Movimiento/insertarMovimientoIngreso'),
-		        params: params,
-		        method: 'POST',
-		        scope: me,
-		        success: function(resp){
-		           var Response = Ext.JSON.decode(resp.responseText);
-		           	pxp.app.hideMask();
-		           if(Response.ROOT.error){
-		           	   alert(Response.ROOT.detalle.mensaje)
-		           }
-		           else{
-			           //mostrar y actualizar el panel de listado
-			           me.onBackList(); 
-			           me.getAgendalist().down('list').getStore().load({start:0,limit:20,page:1});
-		           }
-		           
-		        },
-		        failure:function(resp){
-                    var Response = Ext.JSON.decode(resp.responseText);
-                    pxp.app.hideMask();
-                    alert(Response.ROOT.detalle.mensaje)
-                }
-        });
-    	
-   }, 
-   onDelete:function(){
-    	
-    	
-    	var seltected = this.getAgendalist().down('list').getSelection();
-    	
-    	if(seltected.length == 0){
-    	    Ext.Msg.alert('Info ...','Selecione una fila primero');
-    	    return
-    	}
-    	
-    	pxp.app.showMask();
-    	
-    	var me = this,
-    	    params = {
-                id_movimiento:  seltected[0].data.id_movimiento
-              
-              };
-              
-        pxp.app.showMask();      
-    	Ext.Ajax.request({
-		        
-		        withCredentials: true,
-	            useDefaultXhrHeader: false,
-	            url: pxp.apiRest._url('admin/Movimiento/eliminarMovimiento'),
-		        params: params,
-		        method: 'POST',
-		        scope: me,
-		        success: function(resp){
-		        var Response = Ext.JSON.decode(resp.responseText);
-		           pxp.app.hideMask();
-		           
-		           if(Response.ROOT.error){
-		           	   alert(Response.ROOT.detalle.mensaje)
-		           }
-		           else{
-			           //mostrar y actualizar el panel de listado
-			           me.onBackList(); 
-			           me.getAgendalist().down('list').getStore().load({start:0,limit:20,page:1});
-		           }
-		          
-		         
-		        },
-		        failure:function(resp){
-                    var Response = Ext.JSON.decode(resp.responseText);
-                    pxp.app.hideMask();
-                    alert(Response.ROOT.detalle.mensaje)
-                }
-        });
-    	
-    	
-   }, 
-   
-   onTapListEvento: function(){
-    	var me = this;
-    	
-    	if(!me.eventocmp){
-    		
-    		var cmphidden = me.getAgendaform().down('#id_evento'),
-    		    cmpText =me.getAgendaform().down('#nombre');
-    		
-    	    me.eventocmp = Ext.create('pxp.view.component.Evento',{
-	    	   	'cmpHidden': cmphidden,
-	    	   	'cmpText': cmpText,
-	    	   	'displayColumn':'nombre',
-	    	   	'idColumn':'id_evento'
-    	   });
-    	   
-    	   Ext.Viewport.add(me.eventocmp);
-    	}
-    	
-    	var  store = me.eventocmp.down('list').getStore();
-    	store.load({
-    		start:0,
-    		limit:20,
-    		page:1
-    		});
-    		
-    	me.eventocmp.show();
-    	
-    },
-    
-    onTapListObrero: function(){
-    	var me = this;
-    	
-    	if(!me.obrerocmp){
-    		
-    		var cmphidden = me.getAgendaform().down('#id_obrero'),
-    		    cmpText = me.getAgendaform().down('#desc_obrero');
-    		
-    	    me.obrerocmp = Ext.create('pxp.view.component.Obrero',{
-	    	   	'cmpHidden':cmphidden,
-	    	   	'cmpText':cmpText,
-	    	   	'displayColumn':'desc_persona',
-	    	   	'idColumn':'id_obrero'
-    	   });
-    	   
-    	   Ext.Viewport.add(me.obrerocmp);
-    	}
-    	
-    	var  store = me.obrerocmp.down('list').getStore();
-    	store.load({
-    		start:0,
-    		limit:20,
-    		page:1
-    		});
-    	me.obrerocmp.show();
-    	
-    },
-    
-   onTapListCasaOracion:function(){
-    	var me = this;
-    	
-    	if(!me.casaoracioncmp){
-    		
-    		var cmphidden = me.getAgendaformfilter().down('#id_casa_oracion'),
-    		    cmpText = me.getAgendaformfilter().down('#nombre_co');
-    		
-    	    me.casaoracioncmp = Ext.create('pxp.view.component.CasaOracion',{
-	    	   	'cmpHidden':cmphidden,
-	    	   	'cmpText':cmpText,
-	    	   	'displayColumn':'nombre',
-	    	   	'idColumn':'id_casa_oracion'
-    	   });
-    	   
-    	   Ext.Viewport.add(me.casaoracioncmp);
-    	}
-    	
-    	var  store = me.casaoracioncmp.down('list').getStore();
-    	store.load({
-    		start:0,
-    		limit:20,
-    		page:1
-    		});
-    	me.casaoracioncmp.show();
-    	
-    },
-    
     onTapListLugar: function(){
     	var me = this;
-    	
-    	if(!me.lugarcmp){
-    		
-    		var cmphidden = me.getAgendaformfilter().down('#id_lugar'),
-    		    cmpText = me.getAgendaformfilter().down('#nombre');
-    		
-    	    me.lugarcmp = Ext.create('pxp.view.component.Lugar',{
-	    	   	'cmpHidden':cmphidden,
-	    	   	'cmpText':cmpText,
-	    	   	'displayColumn':'nombre',
-	    	   	'idColumn':'id_lugar'
-    	   });
-    	   
-    	   Ext.Viewport.add(me.lugarcmp);
-    	}
-    	
     	var  store = me.lugarcmp.down('list').getStore();
     	store.load({
     		start:0,
@@ -333,23 +175,8 @@ Ext.define('pxp.controller.Agenda', {
     }, 
     
     onTapListGestion:function(){
-    	var me = this;
-    	
-    	if(!me.gestioncmp){
-    		console.log('1')
-    		var cmphidden = me.getAgendaformfilter().down('#id_gestion'),
-    		    cmpText = me.getAgendaformfilter().down('#gestion');
-    		me.gestioncmp = Ext.create('pxp.view.component.Gestion',{
-	    	   	'cmpHidden':cmphidden,
-	    	   	'cmpText':cmpText,
-	    	   	'displayColumn':'gestion',
-	    	   	'idColumn':'id_gestion'
-    	   });
-    	   Ext.Viewport.add(me.gestioncmp);
-    	   
-    	}
-    	
-    	var  store = me.gestioncmp.down('list').getStore();
+    	var me = this,
+    	    store = me.gestioncmp.down('list').getStore();
     	store.load({
     		start:0,
     		limit:20,

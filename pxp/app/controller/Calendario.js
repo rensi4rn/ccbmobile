@@ -21,7 +21,7 @@ Ext.define('pxp.controller.Calendario', {
             	selectionchange: 'onSelectDate',
             	eventtap: 'onEventTap',
             	touchmove: 'onTouchMove'
-            },
+            }
             
         } 
     },

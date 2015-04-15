@@ -7,7 +7,7 @@
     /**
      * The file path to this application's front HTML document, relative to this app.json file
      */
-    "indexHtmlPath": "index.php",
+    "indexHtmlPath": "index.html",
 
     /**
      * The absolute URL to this application in development environment, i.e: the URL to run this application
@@ -39,6 +39,7 @@
      *      }
      */
     "js": [
+        
         {
             "path": "resources/js/config.js",
             "remote": true 

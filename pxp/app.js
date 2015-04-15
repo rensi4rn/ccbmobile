@@ -43,7 +43,8 @@ Ext.application({
         'agenda.Agenda' ,
         'rendicion.Rendicion',
         'saldos.Saldos',
-        'calendario.Calendario'   
+        'calendario.Calendario',
+        'casaoracion.CasaOracion'  
     ],
     
     controllers : [
@@ -59,7 +60,8 @@ Ext.application({
         'Agenda',
         'Rendicion',
         'Saldos',
-        'Calendario'
+        'Calendario',
+        'CasaOracion'
     ],
 
     icon: {
