@@ -1,15 +1,16 @@
-Ext.define('pxp.store.VoBoFondo', {
+Ext.define('pxp.store.TipoEvento', {
     extend: 'Ext.data.Store',
     requires: [
        'Ext.data.proxy.Memory',
-       'Ext.util.Sorter'
+       'Ext.util.Sorter',
+       'pxp.model.TipoEvento'
     ],
     config: {
 	    autoLoad: true,
 	    simpleSortMode: true,
 	    remoteFilter: false,
 	    pageSize: 30,
-	    model: 'pxp.model.VoBoFondo',
+	    model: 'pxp.model.TipoEvento',
 	    successProperty: 'success'       
 	 },
 	  
@@ -19,9 +20,9 @@ Ext.define('pxp.store.VoBoFondo', {
 	        type: 'ajax',
 	        withCredentials: true,
 	        useDefaultXhrHeader: false,
-	        extraParams:{tipo_interfaz:'VoBoProceso'},
+	        //extraParams:{tipo_interfaz:'VoBoProceso'},
 	        //pageParam: 'page',//This parameter needs to be modified
-	        url: pxp.apiRest._url('tesoreria/CuentaDocumentadaEndesis/listarFondoAvance'),
+	        url: pxp.apiRest._url('admin/Evento/listarEvento'),
 	        reader : {
 		        type : 'json',
 		        rootProperty : 'datos',

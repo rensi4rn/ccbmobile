@@ -49,8 +49,12 @@ Ext.define('pxp.controller.Agenda', {
             	tap:'onTapListObrero'
             },
             
-            'agendaform #eventobutton': {
+            'agendaformfilter #eventobutton': {
             	tap:'onTapListEvento'
+            },
+            
+            'agendaformfilter #obrerobutton':{
+            	tap:'onTapListObrero'
             },
             
             'agendaform #save': {
@@ -68,6 +72,9 @@ Ext.define('pxp.controller.Agenda', {
             },
             'agendaformfilter': {
             	activate:'onInitForm'
+            },
+            'agendaformfilter #reset': {
+            	tap:'onResetForm'
             }
             
             
@@ -75,6 +82,11 @@ Ext.define('pxp.controller.Agenda', {
         } 
     },
    
+   onResetForm: function(){
+   	   var me = this;
+   	   
+   	   me.getAgendaformfilter().reset();
+   },
    
    onInitForm: function(){
     	var me = this,
@@ -185,6 +197,69 @@ Ext.define('pxp.controller.Agenda', {
     		
     	me.gestioncmp.show();
     	
+    }, 
+   
+   onTapListEvento: function(){
+    	var me = this;
+    	
+    	if(!me.eventocmp){
+    		
+    		var cmphidden = me.getAgendaformfilter().down('#id_evento'),
+    		    cmpText =me.getAgendaformfilter().down('#nombre_evento');
+    		
+    	    me.eventocmp = Ext.create('pxp.view.component.Evento',{
+	    	   	'cmpHidden': cmphidden,
+	    	   	'cmpText': cmpText,
+	    	   	'displayColumn':'nombre',
+	    	   	'idColumn':'id_evento'
+    	   });
+    	   
+    	   Ext.Viewport.add(me.eventocmp);
+    	}
+    	
+    	var  store = me.eventocmp.down('list').getStore();
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    		
+    	me.eventocmp.show();
+    	
+    },
+    
+    onTapListObrero: function(){
+    	var me = this;
+    	
+    	if(!me.obrerocmp){
+    		
+    		var cmphidden = me.getAgendaformfilter().down('#id_obrero'),
+    		    cmpText = me.getAgendaformfilter().down('#desc_obrero');
+    		
+    	    me.obrerocmp = Ext.create('pxp.view.component.Obrero',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText,
+	    	   	'displayColumn':'desc_persona',
+	    	   	'idColumn':'id_obrero'
+    	   });
+    	   
+    	   Ext.Viewport.add(me.obrerocmp);
+    	}
+    	
+    	var  store = me.obrerocmp.down('list').getStore();
+    	
+    	store.getProxy().setExtraParams({
+	    		     'codigo_ministerio': "''anciano''"
+				});
+				
+				
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	me.obrerocmp.show();
+    	
     },
     
     onBackFilter:function(){
@@ -199,7 +274,9 @@ Ext.define('pxp.controller.Agenda', {
     	    store = me.getAgendalist().down('list').getStore(),
     	    formfilter = this.getAgendaformfilter(),
     	    id_lugar = formfilter.down('#id_lugar').getValue(),
-    	    id_gestion = formfilter.down('#id_gestion').getValue();
+    	    id_gestion = formfilter.down('#id_gestion').getValue(),
+    	    id_obrero = formfilter.down('#id_obrero').getValue(),
+    	    id_evento = formfilter.down('#id_evento').getValue();
     	
     	if(id_lugar && id_gestion){
     		
@@ -210,6 +287,8 @@ Ext.define('pxp.controller.Agenda', {
 	    	store.getProxy().setExtraParams({
 	    		     'id_lugar': id_lugar,
 	    		     'id_gestion': id_gestion,
+	    		     'id_obrero': id_obrero,
+	    		     'id_evento': id_evento,
 	    		     'tipo_registro': 'detalle',
 	    		     'tipolist': 'mobile',
 	    		     'sort':"fecha_programada",
@@ -221,6 +300,9 @@ Ext.define('pxp.controller.Agenda', {
 	    		limit:20,
 	    		page:1,
 	    		scope: me});	
+    	}
+    	else{
+    		alert('Tiene que indicar minimamente la gestion y el lugar')
     	}
     	
     },

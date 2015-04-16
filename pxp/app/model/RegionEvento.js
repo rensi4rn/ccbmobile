@@ -23,7 +23,7 @@ Ext.define('pxp.model.RegionEvento', {
 			    'codigo',
 			    'nombre',
 			    'id_usuario_mod',
-			    'cuenta',
+			    'cuenta','id_obrero','desc_obrero',
 			    {name:'hora', type: 'date',dateFormat:'H:i:s'}
 			    
 			]

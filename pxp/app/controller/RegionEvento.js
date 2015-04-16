@@ -42,6 +42,11 @@ Ext.define('pxp.controller.RegionEvento', {
             	tap:'onTapListCasaOracion'
             },
             
+            'regioneventoform #obrerobutton':{
+            	tap:'onTapListObrero'
+            },
+            
+            
             'regioneventoform #eventobutton':{
             	tap:'onTapListEvento'
             },
@@ -83,6 +88,7 @@ Ext.define('pxp.controller.RegionEvento', {
     	var me = this,
     	    fecha_programada = me.getRegioneventoform().down('#fecha_programada'),
     	    id_evento = me.getRegioneventoform().down('#id_evento'),
+    	    id_obrero = me.getRegioneventoform().down('#id_obrero'),
     	    id_casa_oracion = me.getRegioneventoform().down('#id_casa_oracion'),
     	    cantidad_hermano = me.getRegioneventoform().down('#cantidad_hermano'),
     	    cantidad_hermana = me.getRegioneventoform().down('#cantidad_hermana'),
@@ -95,6 +101,8 @@ Ext.define('pxp.controller.RegionEvento', {
          	alert('Necesitamos que indique la hora del evento', Ext.emptyFn);
             return;
         } 
+        
+        
              
              
         if(!id_evento.getValue()){
@@ -104,6 +112,11 @@ Ext.define('pxp.controller.RegionEvento', {
         
         if(!id_casa_oracion.getValue()){
          	alert('Necesitamos que indique la casa de oración', Ext.emptyFn);
+            return;
+        } 
+        
+        if(!id_obrero.getValue()){
+         	alert('Necesitamos que indique el obrero que atiende', Ext.emptyFn);
             return;
         } 
         
@@ -206,7 +219,8 @@ Ext.define('pxp.controller.RegionEvento', {
 	    	   	'cmpHidden': cmphidden,
 	    	   	'cmpText': cmpText,
 	    	   	'displayColumn':'nombre',
-	    	   	'idColumn':'id_evento'
+	    	   	'idColumn':'id_evento',
+	    	   	'filtroEvento':'bsc'
     	   });
     	   
     	   Ext.Viewport.add(me.eventocmp);
@@ -248,6 +262,37 @@ Ext.define('pxp.controller.RegionEvento', {
     		page:1
     		});
     	me.casaoracioncmp.show();
+    	
+    },
+    
+    onTapListObrero: function(){
+    	var me = this;
+    	
+    	if(!me.obrerocmp){
+    		
+    		var cmphidden = me.getRegioneventoform().down('#id_obrero'),
+    		    cmpText = me.getRegioneventoform().down('#desc_obrero');
+    		
+    	    me.obrerocmp = Ext.create('pxp.view.component.Obrero',{
+	    	   	'cmpHidden':cmphidden,
+	    	   	'cmpText':cmpText,
+	    	   	'displayColumn':'desc_persona',
+	    	   	'idColumn':'id_obrero'
+    	   });
+    	   
+    	   Ext.Viewport.add(me.obrerocmp);
+    	}
+    	
+    	var  store = me.obrerocmp.down('list').getStore();
+    	store.getProxy().setExtraParams({
+	    		     'codigo_ministerio': "''anciano''"
+				});
+    	store.load({
+    		start:0,
+    		limit:20,
+    		page:1
+    		});
+    	me.obrerocmp.show();
     	
     },
     

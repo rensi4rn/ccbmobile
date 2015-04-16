@@ -114,7 +114,6 @@ Ext.define('Ext.ux.TouchCalendarEvents', {
     
     init: function(calendar){
 	    var me = this;
-
         this.calendar = calendar; // cache the parent calendar
         this.calendar.eventsPlugin = this; // cache the plugin instance on the calendar itself  
         

@@ -48,7 +48,10 @@ Ext.define('pxp.view.regionevento.RegionEventoList', {
 						   "<td colspan=2 style='float: left;' width='100%'> {fecha_programada:date('j F, Y')} - <font size='2'>({estado})</font></td>"+						   
 						  "</tr>"+
 						  "<tr>"+
-						    "<td colspan=2 style='float: left;' width='100%'>Casa Oración: {nombre_co}</td>"+						   
+						    "<td colspan=2 style='float: left;' width='100%'>Casa Oración: {nombre_co} ({nombre_region})</td>"+						   
+						  "</tr>"+
+						  "<tr>"+
+						    "<td colspan=2 style='float: left;' width='100%'>Atiende: {desc_obrero}</td>"+						   
 						  "</tr>"+
 						  "<tr>"+
 						    "<td colspan=2 style='float: left;' width='100%'>Evento: {nombre} - ({hora:date('H:i:s')})</td>"+						   

@@ -66,7 +66,10 @@ Ext.define('pxp.view.agenda.AgendaList', {
 						  "</tr>"+
 						  "<tr>"+
 						    "<td colspan=5 style='float: left;' width='100%'>Lugar: {desc_lugar} - Reg: {desc_region}</td>"+						   
-						  "</tr>"+						  
+						  "</tr>"+	
+						  "<tr>"+
+						    "<td colspan=5 style='float: left;' width='100%'>Atiende: {desc_obrero}</td>"+						   
+						  "</tr>"+					  
 						  
 						  "<tr>"+
 						    "<td colspan=5 style='float: left;' width='100%'><p align='right'><font size='1'>(actualizado por: {usr_mod})</font></p></td>"+						   
@@ -75,13 +78,7 @@ Ext.define('pxp.view.agenda.AgendaList', {
      
 	   	
 	   }]);
-	   /*
-	   me.mask(); 
-       me.store.load({callback:function(){
-    		me.unmask();
-    		
-       }});*/
-       //me.callParent(arguments)
+	  
        me.unmask();
     	  
     }

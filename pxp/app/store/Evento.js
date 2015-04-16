@@ -20,8 +20,6 @@ Ext.define('pxp.store.Evento', {
 	        type: 'ajax',
 	        withCredentials: true,
 	        useDefaultXhrHeader: false,
-	        //extraParams:{tipo_interfaz:'VoBoProceso'},
-	        //pageParam: 'page',//This parameter needs to be modified
 	        url: pxp.apiRest._url('admin/RegionEvento/listarCalendario'),
 	        reader : {
 		        type : 'json',
@@ -31,9 +29,8 @@ Ext.define('pxp.store.Evento', {
 		    
 		    listeners:{
 		    	'exception':function(proxy, response, operation){
-		                    var Response = Ext.JSON.decode(response.responseText);
 		                    pxp.app.hideMask();
-		                    Ext.Msg.alert('Ocurrio un problema', Response.ROOT.detalle.mensaje, Ext.emptyFn);
+		                    Ext.Msg.alert('Ocurrio un problema', 'al comunicarce con el servidor');
 				            
                       }
 		    	

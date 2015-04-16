@@ -28,17 +28,16 @@ Ext.define('pxp.view.calendario.Calendario', {
     	var me = this;
     	me.store = Ext.create('pxp.store.Evento');
     	
-		var calendar = new Ext.ux.TouchCalendarView({
-                        weekStart: 0,
-		                itemId: 'calendar',
+    	me.calendar = new Ext.ux.TouchCalendarView({
+                        itemId: 'calendar',
 		                viewMode: 'month',
 	                    value: new Date(),
 	                    flex:1,
-		                enableSwipeNavigate: true,
-	                    enableSimpleEvents: true,
-                        enableEventBars: true,
+		                enableSwipeNavigate: false,
+	                    enableSimpleEvents: false,
+                        enableEventBars: false,
 	                    eventBarTpl: '<div>{desc_evento}</div>',
-						weekStart: 0,
+						weekStart: 1,
 						eventStore: me.store,
 						plugins: [Ext.create('Ext.ux.TouchCalendarEvents', {
 			                        eventHeight: 'auto',
@@ -47,25 +46,33 @@ Ext.define('pxp.view.calendario.Calendario', {
 					
                    });
 		
-  me.add([calendar, {
+         me.add([this.calendar, {
                                 xtype: 'toolbar',
                                 docked: 'top',
-                                items: [{
+                                items: [
+                                {
+			                        xtype: 'button',
+			                        ui: 'back ',
+			                        text: 'Filtro',
+			                        itemId: 'backfilter'
+			                    },
+                                
+                                {
                                     xtype: 'button',
-                                    text: 'Month View',
+                                    text: 'Por Meses',
                                     handler: function(){
-                                        calendar.setViewMode('month');
+                                        me.calendar.setViewMode('month');
                                     }
                                 }, {
                                     xtype: 'button',
-                                    text: 'Week View',
+                                    text: 'Por Semanas',
                                     handler: function(){
-                                        calendar.setViewMode('week');
+                                        me.calendar.setViewMode('week');
                                     }
                                 }]
                             }]);
 
-        
+        /*
 	     var fecha_ini = Ext.Date.add(new Date(), Ext.Date.DAY, -31),
 		      fecha_fin = Ext.Date.add(new Date(), Ext.Date.DAY, 31)
 		 pxp.app.showMask(); 
@@ -76,11 +83,30 @@ Ext.define('pxp.view.calendario.Calendario', {
 	     
          me.store.load({callback:function(){ 
          	 pxp.app.hideMask(); 
-         	 calendar.refresh();}});
-	    
-	    calendar.element.on('swipe', function(a,b,c,d){
+         	 calendar.refresh(); }});*/
+	    this.calendar.element.on('swipe', function(a,b,c,d){
 	    	
-	    	 calendar.fireEvent('touchmove',calendar, a,b,c,d)
+	    	 this.calendar.fireEvent('touchmove',calendar, a,b,c,d)
 	    }, this);
+    },
+    iniciarFiltros: function(data){
+    	var me = this,
+    	    calendar = this.calendar;
+    	pxp.app.showMask(); 
+		console.log('............');
+		var fecha_ini = Ext.Date.add(new Date(), Ext.Date.DAY, -31),
+		    fecha_fin = Ext.Date.add(new Date(), Ext.Date.DAY, 31);
+		me.store.getProxy().setExtraParams(Ext.apply({
+	    		     "fecha_ini": Ext.Date.format(fecha_ini,'d/m/Y'),
+	    		     "fecha_fin": Ext.Date.format(fecha_fin,'d/m/Y')
+				}, data));
+	     
+	     
+         me.store.load({callback:function(){
+         	console.log('al retorno ....') 
+         	 pxp.app.hideMask(); 
+         	 calendar.refresh();
+         },
+         scope:this});
     }
 });

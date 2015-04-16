@@ -29,9 +29,8 @@ Ext.define('pxp.store.Interinos', {
 		    
 		    listeners:{
 		    	'exception':function(proxy, response, operation){
-		                    var Response = Ext.JSON.decode(response.responseText);
 		                    pxp.app.hideMask();
-		                    Ext.Msg.alert('Ocurrio un problema', Response.ROOT.detalle.mensaje, Ext.emptyFn);
+		                    Ext.Msg.alert('Ocurrio un problema', 'al comunicarce con el servidor');
 				            
                       }
 		    	

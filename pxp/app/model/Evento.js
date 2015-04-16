@@ -31,7 +31,20 @@ Ext.define("pxp.model.Evento", {
 		}, {
 			name: 'hora',
 			type: 'string'
-		}]
+		}, {
+			name: 'id_obrero',
+			type: 'numeric'
+		}, {
+			name: 'desc_obrero',
+			type: 'string'
+		}, {
+			name: 'tipo_vista',
+			type: 'string'
+		}
+		
+		
+		
+		]
 	}
 });
 

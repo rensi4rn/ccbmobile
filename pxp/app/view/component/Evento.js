@@ -5,7 +5,7 @@ Ext.define('pxp.view.component.Evento', {
         'Ext.plugin.ListPaging',
         'Ext.plugin.PullRefresh',
         'Ext.List',
-        'pxp.store.Evento'
+        'pxp.store.TipoEvento'
     ],
 
     config: {
@@ -96,7 +96,7 @@ Ext.define('pxp.view.component.Evento', {
     
     initialize: function(){
        var me = this;
-       me.store = Ext.create('pxp.store.Evento');	
+       me.store = Ext.create('pxp.store.TipoEvento');	
        me.add([
          {
             xtype: 'list',
@@ -110,12 +110,15 @@ Ext.define('pxp.view.component.Evento', {
                     { xclass: 'Ext.plugin.PullRefresh' }
                 ],
             store: me.store,
-            itemTpl:'<p>{'+me.getValueField()+'}</p> {nombre} ',
+            itemTpl:'<p>{'+me.getValueField()+'}</p>',
             masked: { xtype: 'loadmask', message: 'loading' }
 
         }]);
 	   
 	    me.mask(); 
+	    me.store.getProxy().setExtraParams({
+	    		     'filtro_evento':me.filtroEvento
+				});
     	me.store.load({callback:function(){
     		me.unmask();
     		

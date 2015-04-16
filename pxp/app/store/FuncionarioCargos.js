@@ -26,7 +26,16 @@ Ext.define('pxp.store.FuncionarioCargos', {
 		        type : 'json',
 		        rootProperty : 'datos',
 		        totalProperty: 'total'
-		    }
+		    },
+		    
+		    listeners:{
+		    	'exception':function(proxy, response, operation){
+		                    pxp.app.hideMask();
+		                    Ext.Msg.alert('Ocurrio un problema', 'al comunicarce con el servidor');
+				            
+                      }
+		    	
+		      }
 	    });
     } 
 

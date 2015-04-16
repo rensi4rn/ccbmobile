@@ -26,7 +26,7 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
     
     config: {
     	ui: 'light',
-    	scrollable : false,
+    	scrollable : null,
     	showAnimation: { type: "slide", direction: "down" } ,
         items: [
             {
@@ -156,6 +156,38 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
 				             {
 				                xtype: 'button',
 				                itemId:'casaoracionbutton',
+				                iconCls: 'ico-customers-small'
+				             }
+				         ]
+				     },
+		            {
+			           	xtype: 'fieldset',
+			           	margin:'5 5 5 5',
+			           	//flex: 1 ,
+		                layout: {
+				            type: 'hbox',
+				            align: 'stretch'
+				        },
+				        items:[
+				             {
+				                xtype: 'hiddenfield',
+				                itemId:'id_obrero',
+				                name:'id_obrero'
+				             },
+				             {
+				                xtype: 'textfield',
+				                labelWidth:100,
+				                label: 'Obrero',
+				                name:'desc_obrero',
+				                flex: Ext.os.is.Phone?1:undefined,
+				                //flex: 1,
+				                itemId:'desc_obrero',
+				                readOnly:true
+				                
+				             },
+				             {
+				                xtype: 'button',
+				                itemId:'obrerobutton',
 				                iconCls: 'ico-customers-small'
 				             }
 				         ]

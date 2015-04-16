@@ -9,9 +9,9 @@
  * Loans based on the values selected (see the onFilter method in app/controllers/loans.js).
  *
  */
-Ext.define('pxp.view.agenda.AgendaFormFilter', {
+Ext.define('pxp.view.calendario.CalendarioFormFilter', {
     extend: 'Ext.form.Panel',
-    xtype: 'agendaformfilter',
+    xtype: 'calendarioformfilter',
     requires: [
         'Ext.field.Select',
         'Ext.field.Search',
@@ -96,39 +96,7 @@ Ext.define('pxp.view.agenda.AgendaFormFilter', {
 				             }
 				         ]
 				     },
-		            {
-			           	xtype: 'fieldset',
-			           	 margin:'5 5 5 5',
-			           	//flex: 1 ,
-		                layout: {
-				            type: 'hbox',
-				            align: 'stretch'
-				        },
-				        items:[
-				             {
-				                xtype: 'hiddenfield',
-				                itemId:'id_gestion',
-				                name: 'id_gestion'
-				             },
-				             {
-				                xtype: 'textfield',
-				                labelWidth: 100,
-				                label: 'Gestión',
-				                flex: Ext.os.is.Phone?1:undefined,
-				                //flex: 1,
-				                itemId: 'gestion',
-				                name: 'gestion',
-				                readOnly:true
-				                
-				             },
-				             {
-				                xtype: 'button',
-				                itemId:'gestionbutton',
-				                iconCls: 'ico-customers-small'
-				             }
-				         ]
-				     },
-				     
+		              
 				    {
 			           	xtype: 'fieldset',
 			           	 margin:'5 5 5 5',
