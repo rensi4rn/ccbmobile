@@ -27,20 +27,20 @@ Ext.define('pxp.view.regionevento.RegionEventoTbar', {
                 ui: 'light',
                 docked: 'top',
                 items: [
-                    {
+                    /*{
                         xtype: 'button',
                         iconMask: true,
                         iconCls: 'delete',
                         itemId: 'deleteregionevento'
-                    },
+                    },*/
                     { xtype: 'spacer', width: 50 },
-                    { xtype: 'spacer' },
+                    { xtype: 'spacer' }/*,
                     {
                         xtype: 'button',
                         iconMask: true,
                         iconCls: 'add',
                         itemId: 'addregionevento'
-                    }
+                    }*/
                 ]
             }
         ],
