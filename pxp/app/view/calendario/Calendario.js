@@ -27,8 +27,9 @@ Ext.define('pxp.view.calendario.Calendario', {
     initialize:function(){
     	var me = this;
     	me.store = Ext.create('pxp.store.Evento');
-    	
+    	/*me.calendar = new Ext.ux.TouchCalendar({*/
     	me.calendar = new Ext.ux.TouchCalendarView({
+    	
                         itemId: 'calendar',
 		                viewMode: 'month',
 	                    value: new Date(),
@@ -86,7 +87,7 @@ Ext.define('pxp.view.calendario.Calendario', {
          	 calendar.refresh(); }});*/
 	    this.calendar.element.on('swipe', function(a,b,c,d){
 	    	
-	    	 this.calendar.fireEvent('touchmove',calendar, a,b,c,d)
+	    	 this.calendar.fireEvent('touchmove',this.calendar, a,b,c,d)
 	    }, this);
     },
     iniciarFiltros: function(data){
@@ -94,8 +95,8 @@ Ext.define('pxp.view.calendario.Calendario', {
     	    calendar = this.calendar;
     	pxp.app.showMask(); 
 		console.log('............');
-		var fecha_ini = Ext.Date.add(new Date(), Ext.Date.DAY, -31),
-		    fecha_fin = Ext.Date.add(new Date(), Ext.Date.DAY, 31);
+		var fecha_ini = Ext.Date.add(new Date(), Ext.Date.DAY, -60),
+		    fecha_fin = Ext.Date.add(new Date(), Ext.Date.DAY, 60);
 		me.store.getProxy().setExtraParams(Ext.apply({
 	    		     "fecha_ini": Ext.Date.format(fecha_ini,'d/m/Y'),
 	    		     "fecha_fin": Ext.Date.format(fecha_fin,'d/m/Y')

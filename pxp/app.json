@@ -104,10 +104,6 @@
             "path": "resources/css/app.css",
             "remote": true 
         },
-        {
-            "path": "resources/css/slidenav.css",
-            "remote": true 
-        },
         
         {
             "path": "resources/css/tabla_responsive.css",

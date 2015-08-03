@@ -15,17 +15,19 @@ Ext.define('pxp.view.Login', {
     config: {
         title: 'Login',
         itemId:'loginviewid',
+        //style: 'background-color:#FFFFFF',
+        //ui: 'whait',
         scrollable:true,
         enableSubmissionForm:false,
         items: [
             {
                 xtype: 'image',
-                src: 'resources/img/ccb.png',
-                style: 'width:160px;height:81px;margin:auto' 
+                src: 'resources/img/logo.png',
+                style: 'width:150px;height:81px;margin:auto' 
             },
             {
                 xtype: 'label',
-                html: 'Fallo la autenficiación, intentelo nuevamente.',
+                html: 'Login failed. Please enter the correct credentials.',
                 itemId: 'signInFailedLabel',
                 hidden: true,
                 hideAnimation: 'fadeOut',
@@ -54,7 +56,7 @@ Ext.define('pxp.view.Login', {
                     {
 		                    xtype: 'checkboxfield',
 		                    hideEmptyLabel: false,
-		                    label: 'Recordar',
+		                    label: 'Keep me logged in',
 		                    checked: true,
 		                    name: 'remember',
 		                    itemId: 'remember'

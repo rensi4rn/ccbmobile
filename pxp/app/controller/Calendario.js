@@ -206,10 +206,12 @@ Ext.define('pxp.controller.Calendario', {
    },
    onEventTap: function(event){
    	
-          	var calendario = this.getCalendario().down('#calendar');
-   	        calendario.currentDate = event.data.start;
+          	
    	         
              if(event.tipo_vista === 'cambiar'){
+             	var calendario = this.getCalendario().down('#calendar');
+   	             calendario.currentDate = event.data.start;
+             	
              	calendario.setValue(event.data.start)
              	calendario.setViewMode('week');             	
              	calendario.applyViewMode('week');
