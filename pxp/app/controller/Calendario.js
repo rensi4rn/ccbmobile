@@ -221,7 +221,7 @@ Ext.define('pxp.controller.Calendario', {
              else{
              	
              	
-             	if(objCal.config.editable && (event.data.desc_evento == 'Bautizo' || event.data.desc_evento == 'Santa Cena') ){
+             	if(objCal.config.editable && (event.data.desc_evento == 'Bautismo' || event.data.desc_evento == 'Santa Cena') ){
              		  
              		this.getCalendario().hide();
     	            this.getCalendarioformfilter().hide();
