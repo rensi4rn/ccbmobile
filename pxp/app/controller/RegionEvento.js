@@ -20,7 +20,8 @@ Ext.define('pxp.controller.RegionEvento', {
         refs: {
             regioneventolist: 'regioneventolist',
             regioneventotbar: 'regioneventotbar',
-            regioneventoform:'regioneventoform'
+            regioneventoform:'regioneventoform',
+            calendario: 'calendario',
         },
 
         control: {
@@ -75,8 +76,28 @@ Ext.define('pxp.controller.RegionEvento', {
    },
    onBackList:function(){
    	    
-   	    this.getRegioneventoform().hide();
-    	this.getRegioneventolist().show();
+   	    var objFom = this.getRegioneventoform();
+   	    if(objFom.config.origen == 'calendario'){
+   	    	this.getRegioneventoform().hide();
+    	    this.getCalendario().show();
+    	    console.log('..................................',this.getCalendario().calendar)
+    	    //this.getCalendario().calendar.refreshDelta(0);
+    	    
+    	    pxp.app.showMask();
+    	    this.getCalendario().store.load({callback:function(){
+					         	pxp.app.hideMask(); 
+					         	this.getCalendario().calendar.refresh();
+					        },
+					        scope:this});
+					        
+    	    this.getCalendario().calendar.refresh();
+    	    
+   	    }
+   	    else{
+   	    	this.getRegioneventoform().hide();
+    	    this.getRegioneventolist().show();
+   	    }
+   	    
      	
    },
     
@@ -143,8 +164,12 @@ Ext.define('pxp.controller.RegionEvento', {
 		           }
 		           else{
 			           //mostrar y actualizar el panel de listado
+			           var objFom = this.getRegioneventoform();
 			           me.onBackList(); 
-			           me.getRegioneventolist().down('list').getStore().load({start:0,limit:20,page:1});
+			           if(objFom.config.origen != 'calendario'){
+				   	    	me.getRegioneventolist().down('list').getStore().load({start:0,limit:20,page:1});
+				   	   }
+			           
 		           }
 		        },
 		        failure:function(resp){

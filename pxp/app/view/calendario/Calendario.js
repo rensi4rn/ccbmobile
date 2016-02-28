@@ -17,9 +17,10 @@ Ext.define('pxp.view.calendario.Calendario', {
         'pxp.store.Evento',
         'pxp.model.Evento'
     ],
-
+    
     config: {
         //fullscreen: true,
+        editable: false,
         layout: 'fit',
         items: []
     },
@@ -94,20 +95,22 @@ Ext.define('pxp.view.calendario.Calendario', {
     	var me = this,
     	    calendar = this.calendar;
     	pxp.app.showMask(); 
-		console.log('............');
-		var fecha_ini = Ext.Date.add(new Date(), Ext.Date.DAY, -60),
-		    fecha_fin = Ext.Date.add(new Date(), Ext.Date.DAY, 60);
+    	
+    	
+		
+		var fecha_ini = Ext.Date.add(calendar.currentDate, Ext.Date.DAY, -60),
+		    fecha_fin = Ext.Date.add(calendar.currentDate, Ext.Date.DAY, 60);
+		
 		me.store.getProxy().setExtraParams(Ext.apply({
 	    		     "fecha_ini": Ext.Date.format(fecha_ini,'d/m/Y'),
 	    		     "fecha_fin": Ext.Date.format(fecha_fin,'d/m/Y')
 				}, data));
 	     
 	     
-         me.store.load({callback:function(){
-         	console.log('al retorno ....') 
-         	 pxp.app.hideMask(); 
-         	 calendar.refresh();
-         },
-         scope:this});
+        me.store.load({callback:function(){
+         	pxp.app.hideMask(); 
+         	calendar.refresh();
+        },
+        scope:this});
     }
 });

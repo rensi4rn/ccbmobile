@@ -26,6 +26,7 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
     
     config: {
     	ui: 'light',
+    	origen: 'ninguno',
     	scrollable : null,
     	showAnimation: { type: "slide", direction: "down" } ,
         items: [
@@ -66,19 +67,19 @@ Ext.define('pxp.view.regionevento.RegionEventoForm', {
 	            type: 'vbox'
 	        },
             items:[  {
-				                xtype: 'hiddenfield',
-				                itemId:'id_region_evento',
-				                name:'id_region_evento'
+		                xtype: 'hiddenfield',
+		                itemId:'id_region_evento',
+		                name:'id_region_evento'
 				     },
 				     {
-				                xtype: 'hiddenfield',
-				                itemId:'id_detalle_evento_hermano',
-				                name:'id_detalle_evento_hermano'
+		                xtype: 'hiddenfield',
+		                itemId:'id_detalle_evento_hermano',
+		                name:'id_detalle_evento_hermano'
 				     },
 				     {
-				                xtype: 'hiddenfield',
-				                itemId:'id_detalle_evento_hermana',
-				                name:'id_detalle_evento_hermana'
+		                xtype: 'hiddenfield',
+		                itemId:'id_detalle_evento_hermana',
+		                name:'id_detalle_evento_hermana'
 				    
 				    },
 		            {

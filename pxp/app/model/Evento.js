@@ -40,7 +40,12 @@ Ext.define("pxp.model.Evento", {
 		}, {
 			name: 'tipo_vista',
 			type: 'string'
-		}
+		},
+		'id_casa_oracion',
+        'id_region',
+        'id_evento',
+        'desc_gestion',
+        'id_gestion'
 		
 		
 		

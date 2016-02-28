@@ -13,7 +13,8 @@ Ext.define('pxp.controller.Calendario', {
         stores: [],
         refs: {
             calendario: 'calendario',
-            calendarioformfilter:'calendarioformfilter'
+            calendarioformfilter:'calendarioformfilter',
+            regioneventoform:'regioneventoform'
         },
 
         control: {
@@ -159,6 +160,9 @@ Ext.define('pxp.controller.Calendario', {
     	
    },
    
+   
+   
+   
    onTapListEvento: function(){
     	var me = this;
     	
@@ -205,26 +209,69 @@ Ext.define('pxp.controller.Calendario', {
         }
    },
    onEventTap: function(event){
-   	
-          	
-   	         
-             if(event.tipo_vista === 'cambiar'){
-             	var calendario = this.getCalendario().down('#calendar');
-   	             calendario.currentDate = event.data.start;
+         	var objCal = this.getCalendario();
+          	if(event.tipo_vista === 'cambiar'){
+             	var calendario = objCal.down('#calendar');
+   	            calendario.currentDate = event.data.start;
              	
              	calendario.setValue(event.data.start)
              	calendario.setViewMode('week');             	
              	calendario.applyViewMode('week');
              } 
              else{
-             	Ext.Msg.alert(
+             	
+             	
+             	if(objCal.config.editable && (event.data.desc_evento == 'Bautizo' || event.data.desc_evento == 'Santa Cena') ){
+             		  
+             		this.getCalendario().hide();
+    	            this.getCalendarioformfilter().hide();
+    	            this.getRegioneventoform().show();
+    	            this.getRegioneventoform().reset(); 
+    	            this.getRegioneventoform().down('title').setTitle('Editar Evento');
+    	            this.cargarEvento(event.data.id_region_evento);
+    	            
+    	
+             	}
+             	else{
+             		Ext.Msg.alert(
                         event.get('event'),
                         event.get('title') + ' ' + event.get('hora') + ' ('+event.get('desc_obrero')+')'
                     );
+             	}
+             	
              }      
                     
                   
    },
+   
+   cargarEvento: function(id_region_evento){
+   	    var me = this;
+   	    console.log('id_region_evento',id_region_evento) 
+   	       
+	   	pxp.app.showMask(); 
+	   	Ext.Ajax.request({
+			        withCredentials: true,
+		            useDefaultXhrHeader: false,
+		            url: pxp.apiRest._url('admin/RegionEvento/listarBautizoSantaCena'),
+			        params: { 'id_region_evento': id_region_evento, 'tipoconsulta': 'calendario','page': 1,'start': 0, 'limit': 1 },
+			        method: 'POST',
+			        scope: me,
+			        success: function(resp){
+			           var Response = Ext.JSON.decode(resp.responseText);
+			           pxp.app.hideMask();
+			           var regeve = Ext.create('pxp.model.RegionEvento', Response.datos[0]);
+    	               this.getRegioneventoform().setRecord(regeve);
+			           
+			        },
+			        failure:function(resp){
+	                    var Response = Ext.JSON.decode(resp.responseText);
+	                    pxp.app.hideMask();
+	                    alert(Response.ROOT.detalle.mensaje)
+	                }
+	        });
+   },
+   
+   
    onChangePeriod: function(o, minDate, maxDate, direction, eOpts){
    	  // alert('evento')
    	  console.log('onChangePeriod', o, minDate, maxDate)

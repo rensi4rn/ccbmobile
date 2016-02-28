@@ -44,7 +44,8 @@ Ext.application({
 	        'rendicion.Rendicion',
 	        'saldos.Saldos',
 	        'calendario.CalendarioMain',
-	        'calendario.Calendario',
+	        'calendario.Calendario',,
+	        'calendario.CalendarioBautizoMain',
 	        'casaoracion.CasaOracion'  
 	    ],
 	    
